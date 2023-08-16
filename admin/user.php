@@ -61,7 +61,7 @@ h2 {
 .listing_block {
     background: white;
     padding-left: 20px;
-    padding: 40px;
+    padding: 30px 40px;
 }
 
 .listing_block td {
@@ -188,7 +188,10 @@ td {
         <div class="d-flex mb-4 listing_block_wrap">
             <h1 class="mb-2">Users</h1>
             <button class="btn cta_btn add_btn " onclick="adduser()">Add User</button>
-            <div class="input-group">
+           
+        </div>
+        <div class="d-flex justify-content-end mb-3">
+             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search by name/number" id="search_term">
             </div>
             <div class=" show_advance_filter mt-3 mt-md-0">

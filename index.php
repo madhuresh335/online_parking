@@ -201,6 +201,19 @@ h2 {
 select.form-control:not([size]):not([multiple]) {
     height: auto;
 }
+.show_advance_filter label{
+    text-transform: capitalize;
+}
+@media(min-width: 1199px){
+    .show_advance_filter .form-control {
+    padding: 4px 20px;
+    width: 160px;
+    margin-right: 21px;
+}
+.show_advance_filter select{
+    margin-left:0px !important;
+}
+}
 </style>
 <div class="">
     <?php include('sidebar.php');?>
@@ -209,20 +222,14 @@ select.form-control:not([size]):not([multiple]) {
     <div class="listing_block mr-md-4">
         <div class="d-flex mb-4 flex-wrap">
             <h1 class="mb-2">Parking lot</h1>
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search here">
-                <div class="">
-                    <button class="btn btn-secondary" type="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-search" viewBox="0 0 16 16">
-                            <path
-                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
+            
             <div class=" show_advance_filter mt-3 mt-md-2">
                 <div class="d-flex ">
+                    <div class="">
+                        <label class="w-100">Search</label>
+                <input type="text" class="form-control" placeholder="Search here">
+           
+            </div>
                     <div class="">
                         <label class="w-100">Zipcode state</label>
                         <input type="text" name="" placeholder="Zipcode state" id="search_term" value="" class="form-control">
@@ -247,7 +254,7 @@ select.form-control:not([size]):not([multiple]) {
                     </div>
 
 
-                    <button type="button" class="btn add_btn cta_btn ml-2 mt-4 mt-md-0" onclick="filter_parking()">GO</button>
+                    <button type="button" class="btn add_btn cta_btn ml-2 mt-4 mt-md-4 align-self-center" onclick="filter_parking()">GO</button>
                     <!-- <div class=" filter_option_show" onclick="hide_filter()">Hide Advance</div> -->
                 </div>
             </div>
@@ -274,7 +281,7 @@ select.form-control:not([size]):not([multiple]) {
             }
 
             .show_advance_filter .form-control {
-                padding: 4px 20px;
+                padding: 6px 20px;
             }
 
             .input-group {

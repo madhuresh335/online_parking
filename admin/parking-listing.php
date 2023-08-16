@@ -89,6 +89,9 @@ h2 {
     border-radius: 5px 0 0 5px;
     border-left: 1px solid #e5ecff !important;
     padding-left: 10px;
+        position: sticky;
+    left: 0;
+    background: white;
 }
 
 .listing_block thead {
@@ -194,6 +197,8 @@ h2 {
         <div class="d-flex mb-4">
             <h1 class="mb-2">Parking lot</h1>
             <button class="cta_btn  add_btn mr-2" onclick="addparking()">Add </button>
+        </div>
+         <div class="d-flex mb-4 justify-content-end">
             <div class="input-group mr-2">
                 <input type="text" id="search_term" class="form-control" placeholder="Search By ZIP/State/Address/Name">
                 <div class="">

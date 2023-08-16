@@ -102,6 +102,7 @@ button {
 .login-space .group .label {
     color: #aaa;
     font-size: 12px;
+    font-weight:bold;
 }
 
 .login-space .group .button {
@@ -230,7 +231,9 @@ a {
 }
 
 .error {
-    color: red;
+    opacity: 1 !important;
+    font-weight: bold;
+    color: #ff0f0f;
     font-size: 15px;
     height: 0px;
     text-transform: capitalize;
@@ -378,7 +381,7 @@ a {
 }
 
 .error {
-    color: white;
+  
     opacity: 0.8;
 }
 
@@ -496,6 +499,9 @@ a {
 .modal_forgot_password {
     display: none;
 }
+#invalid_user_password{
+    display: none;
+}
 </style>
 <div class="login_page_block col-12">
     <div class="row ">
@@ -528,13 +534,14 @@ a {
                                 <div class="group">
                                     <label for="pass" class="label">Password</label>
                                     <input id="password" type="password" class="input  form-control"
-                                        placeholder="Enter your password" onclick="validatepassword('password')">
+                                        placeholder="Enter your password" onblur="validatepassword('password')">
                                     <div id="password_error" class="error"></div>
                                 </div>
                                 <!-- <div class="group">
 					<input id="check" type="checkbox" class="check" checked>
 					<label for="check"><span class="icon"></span> Keep me Signed in</label>
 				</div> -->
+                <div id="invalid_user_password" class="error">Invalid username and password</div>
                                 <div class="group mt-5">
                                     <button type="button" class="button" onclick="login()">Login</button>
                                 </div>
@@ -654,8 +661,11 @@ function login() {
 					}else if(json_response.g == 2){
 						window.location = "<?php echo $site_url ?>/";
 					}
+                    $("#invalid_user_password").hide();
+
 				}else{
-					alert("invalid username and password")
+					// alert("invalid username and password");
+                    $("#invalid_user_password").show();
 				}
             } else {
                 console.log("Error: " + xhr.status);
@@ -679,7 +689,33 @@ function validatepasswordmatch(text) {
         return false;
     }
 }
+function validatepassword(text){
+    // return true;
+   var value = document.getElementById(text).value;
+  var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  if(value == "") {
+        errorMessage = "password is required";
+        document.getElementById(text + "_error").innerHTML = errorMessage;
+       console.log("password is required")
+        return false;
+    }
 
+
+   else if(!pattern.test(value)) {
+
+    errorMessage = "password is not validate required";
+   document.getElementById(text + "_error").innerHTML = errorMessage;
+    console.log("password is not validate required")
+      return false;
+  }
+   else {
+
+    errorMessage = "";
+   document.getElementById(text + "_error").innerHTML = errorMessage;
+   console.log("password validate ")
+   return true;
+  }
+}
 function signup() {
     var validate_phone_number = validatephone('phone_number_new');
     var validate_password = validatepassword('password_new');

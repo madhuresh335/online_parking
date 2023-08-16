@@ -57,6 +57,9 @@
    border-radius: 5px 0 0 5px;
    border-left: 1px solid #e5ecff!important;
    padding-left: 10px;
+       position: sticky;
+    left: 0;
+    background: white;
    }
      .listing_block thead{
       position: sticky;
@@ -146,6 +149,7 @@
     border-radius: 30px;
     text-align: center;
     padding: 2px 24px;
+       width: 100%;
     display: inline-block;
 }
 .inactive_block{
@@ -155,6 +159,16 @@
    text-align: center;
    padding: 2px 18px;
    display: inline-block;
+      width: 100%;
+   }
+   .booked_block{
+     background: orange;
+   color: white;
+   border-radius: 30px;
+   text-align: center;
+   padding: 2px 18px;
+   display: inline-block;
+   width: 100%;
    }
 </style>
 <div class="">
@@ -166,13 +180,7 @@
           <h1 class="mb-2"> History</h1>
             <div class="input-group">
     <input type="text" class="form-control" placeholder="Search here">
-    <div class="">
-      <button class="btn btn-secondary" type="button">
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-</svg>
-      </button>
-    </div>
+    
   </div>
   <div class=" show_advance_filter mt-3 mt-md-0">
      <div class="d-flex ">
@@ -187,7 +195,7 @@
        
         
         <button type="button" class="btn add_btn cta_btn ml-2 mt-4 mt-md-0">GO</button>
-          <div class=" filter_option_show" onclick="hide_filter()">Hide Advance</div>
+  <!--         <div class=" filter_option_show" onclick="hide_filter()">Hide Advance</div> -->
      </div>
   </div>
   <style type="text/css">
@@ -209,9 +217,9 @@
     margin-left: 20px;
         padding: 8px !important;
      }
-     .show_advance_filter{
+    /* .show_advance_filter{
       display: none;
-     }
+     }*/
      .input-group .form-control{
           padding: 0px 4px;
     height: 38px;
@@ -291,9 +299,9 @@
         $('.filter_option').show();
      }
   </script>
-  <div class="filter_option" onclick="show_filter()">Advance</div>
+   <!-- <div class="filter_option" onclick="show_filter()">Advance</div> -->
       </div>
-     
+
      
       <table>
          <thead>
@@ -322,6 +330,9 @@
                   </div>
                </td>
                <td>
+                   <div>Booking time</div>
+               </td>
+               <td>
                   <div>
                      Start time
 
@@ -331,6 +342,11 @@
                   <div>
                     End time
                   </div>
+               </td>
+               <td>
+                   <div>
+                       Number of Hours
+                   </div>
                </td>
                 <td>
                   <div>
@@ -352,10 +368,12 @@
                <td>test</td>
                <td>1234567890</td>
                <td>2 wheeler</td>
-               <td>11-04-2023</td>
-               <td>23-04-2023</td>
+                      <td> 2023-08-16 19:42:31</td>
+               <td> 2023-08-16 19:42:31</td>
+               <td> 2023-08-16 22:34:20</td>
+               <td>3</td>
                <td>40</td>
-              <td><div class="active_block">Active</div></td>
+              <td><div class="booked_block">BOOKED</div></td>
                  
            </tr>
             <tr>
@@ -364,10 +382,26 @@
                <td>test</td>
                <td>1234567890</td>
                <td>2 wheeler</td>
-               <td>11-04-2023</td>
-               <td>23-04-2023</td>
+                      <td> 2023-08-16 19:42:31</td>
+               <td> 2023-08-16 19:42:31</td>
+               <td> 2023-08-16 22:34:20</td>
+                <td>3</td>
                 <td>40</td>
-              <td><div class="inactive_block">Inactive</div></td>
+              <td><div class="active_block">COMPLETED</div></td>
+                 
+           </tr>
+           <tr>
+              
+               <td>A1</td>
+               <td>test</td>
+               <td>1234567890</td>
+               <td>2 wheeler</td>
+                      <td> 2023-08-16 19:42:31</td>
+               <td> 2023-08-16 19:42:31</td>
+               <td> 2023-08-16 22:34:20</td>
+                <td>3</td>
+                <td>40</td>
+              <td><div class="inactive_block">PROCESSING</div></td>
                  
            </tr>
       </tbody>
