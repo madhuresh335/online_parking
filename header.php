@@ -69,7 +69,7 @@ function checkuser_login($user_cookie, $path)
 
 
 
-
+ 
 
 
 
@@ -78,6 +78,7 @@ function checkuser_login($user_cookie, $path)
    <style type="text/css">
      *{
    font-family: 'Mulish', sans-serif;
+   margin:0px;
    }
    </style>
 <!-- mobile style -->
