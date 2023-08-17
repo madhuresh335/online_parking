@@ -80,9 +80,9 @@ h2 {
     border-collapse: separate;
     width: 100%;
     display: block;
-    overflow-x: scroll;
-    height: 480px;
-    overflow-y: scroll;
+    overflow-x: auto;
+    height: 450px;
+    overflow-y: auto;
 }
 
 .listing_block thead td:nth-child(1) {
@@ -193,7 +193,7 @@ h2 {
     <?php include 'sidebar.php';?>
 </div>
 <div class="main_block mt-3 ">
-    <div class="listing_block mr-4">
+    <div class="listing_block mr-md-4">
         <div class="d-flex mb-4">
             <h1 class="mb-2">Parking lot</h1>
             <button class="cta_btn  add_btn mr-2" onclick="addparking()">Add </button>
@@ -267,7 +267,7 @@ h2 {
             }
 
             .input-group {
-                width: 50%;
+                width: 100%;
             }
 
             .filter_option,

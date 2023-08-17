@@ -101,6 +101,9 @@ h2 {
     border-radius: 5px 0 0 5px;
     border-left: 1px solid #e5ecff !important;
     padding-left: 10px;
+    position: sticky;
+    left: 0;
+    background: white;
 }
 
 .listing_block thead {
@@ -259,6 +262,9 @@ select.form-control:not([size]):not([multiple]) {
                 </div>
             </div>
             <style type="text/css">
+                .book_now{
+                    cursor: pointer;
+                }
             .filter_option,
             .filter_option_show {
                 align-self: center;
@@ -635,9 +641,12 @@ select.form-control:not([size]):not([multiple]) {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    /*margin-top: 20px;*/
 }
-
+.form-control:disabled, .form-control[readonly] {
+    background-color: #ffffff;
+    opacity: 1;
+}
 /* Style for individual radio buttons */
 .radio {
     display: flex;
@@ -822,26 +831,25 @@ select.form-control:not([size]):not([multiple]) {
          $current_time = date("H:i");
          $max_time = date("H:i", strtotime("+2 hours"));
  ?>
-                    <input class='form-control' type="time" id="booking_time">
+                    <input class='form-control' type="time" id="booking_time"  min="16:00" max="22:00"value="<?php echo  $current_time?>">
                 </div>
                 <div class="col-md-6">
                     <label>Number of Hours</label>
                     <!--    <input id="test" type="range" value="0" min="1" max="10"> -->
-                    <input id="booking_hours" class='form-control' type="number" step="1" value="1" min="1" max="24"
+                    <input id="booking_hours" class='form-control' type="text" step="1" value="1" min="0" max="24"
                         oninput="validateInput(this)"
                         onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
 
 
 
                 </div>
-                <div class="col-md-6 mt-4 text-left">
-                    <label>Price</label>
-                    <input type="text" name="" class='form-control' id="book_price" value="">
-                    <span id="book_price_error" class="error"></span>
-                </div>
-                <div class="col-md-6 mt-4">
+               
+                <div class="col-md-12 mt-4">
+                    <div class="d-md-flex">
+                        
+                   
                     <label>Wheeler Type</label>
-                    <div class="radio-group">
+                    <div class="radio-group d-md-flex ml-md-4">
                         <label class="radio">
                             <input type="radio" name="vehicle" value="four_wheeler" checked onclick="calculate_price('four_wheeler')">
                             <span class="radio-custom" ></span>
@@ -854,9 +862,14 @@ select.form-control:not([size]):not([multiple]) {
                         </label>
 
                     </div>
+                     </div>
                     <div class="vehicle_type error">Please select the vehicle type</div>
                 </div>
-
+ <div class="col-md-12 mt-4 text-left">
+                    <label>Price</label>
+                    <input type="text" name="" class='form-control' id="book_price" value="" readonly>
+                    <span id="book_price_error" class="error"></span>
+                </div>
                 <div class="col-md-12 mt-4">
                     <button class="cta_btn" onclick="book_now_block()">Book Now</button>
                 </div>
@@ -1122,6 +1135,23 @@ function calculate_price(type) {
     $("#book_price").val(base_price*booking_hours);
    
 }
+     const currentTime = new Date();
+    const currentHours = currentTime.getHours();
+    const currentMinutes = currentTime.getMinutes();
+
+    const inputField = document.getElementById("booking_time");
+    inputField.min = `${currentHours.toString().padStart(2, "0")}:${currentMinutes.toString().padStart(2, "0")}`;
+    inputField.max = "24:00"; // Max limit is 24 hours
+
+    inputField.addEventListener("input", function() {
+      const enteredTime = inputField.value;
+      const enteredHours = parseInt(enteredTime.split(":")[0]);
+      const enteredMinutes = parseInt(enteredTime.split(":")[1]);
+
+      if (enteredHours < currentHours || (enteredHours === currentHours && enteredMinutes <= currentMinutes)) {
+        inputField.value = inputField.min;
+      }
+    });
 </script>
 
 

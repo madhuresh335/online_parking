@@ -80,6 +80,9 @@ function checkuser_login($user_cookie, $path)
    font-family: 'Mulish', sans-serif;
    margin:0px;
    }
+   a,button{
+    cursor: pointer;
+   }
    </style>
 <!-- mobile style -->
 <style type="text/css">
@@ -252,9 +255,20 @@ document.cookie = "userdata="+JSON.stringify(cookie)+";expires="+expires;
     align-self: center;
 }
 }
+
+
+@media(max-width: 767px){
+    .shrink-btn{
+        display: none;
+    }
+    .main_block.main_block_active {
+    padding-left: 89px !important;
+}
+}
 </style>
 <script type="text/javascript">
     function show_menu(){
         $('.header_sidebar').toggle();
+          // $('.shrink-btn').show();
     }
 </script>

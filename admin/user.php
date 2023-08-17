@@ -71,6 +71,8 @@ h2 {
 
 .listing_block table {
     border-collapse: separate;
+    height: 450px;
+    overflow: auto;
 }
 
 .listing_block thead td:nth-child(1) {
@@ -190,7 +192,7 @@ td {
             <button class="btn cta_btn add_btn " onclick="adduser()">Add User</button>
            
         </div>
-        <div class="d-flex justify-content-end mb-3">
+        <div class="d-md-flex justify-content-end mb-3">
              <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search by name/number" id="search_term">
             </div>
@@ -257,11 +259,15 @@ td {
                 .listing_block_wrap {
                     flex-wrap: wrap;
                 }
-
-                .input-group {
-                    width: 50%;
-                }
-
+.input-group {
+    width: 100%;
+}
+              .input-group .form-control {
+    padding: 0px 4px;
+    height: 38px;
+    width: 100%;
+    margin-left: 0px;
+}
                 .filter_option,
                 .filter_option_show {
                     padding-left: 5px;
