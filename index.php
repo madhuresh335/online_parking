@@ -417,12 +417,17 @@ select.form-control:not([size]):not([multiple]) {
                     </td>
                     <td>
                         <div>
-                            Total 4 wheeler slot
+                            Available 4 wheeler slot
                         </div>
                     </td>
                     <td>
                         <div>
-                            Total 2 wheeler slot
+                            4 wheeler price
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            Available 2 wheeler slot
                         </div>
                     </td>
 
@@ -431,11 +436,7 @@ select.form-control:not([size]):not([multiple]) {
                             2 wheeler price
                         </div>
                     </td>
-                    <td>
-                        <div>
-                            4 wheeler price
-                        </div>
-                    </td>
+  
 
                     <td>
                         <div>
@@ -858,6 +859,10 @@ select.form-control:not([size]):not([multiple]) {
                 </div>
 
                 <div class="col-md-12 mt-4">
+                    <button class="cta_btn" onclick="check_availablity()">Check Availablity Now</button>
+                </div>
+
+                <div class="col-md-12 mt-4">
                     <button class="cta_btn" onclick="book_now_block()">Book Now</button>
                 </div>
             </div>
@@ -926,11 +931,12 @@ function find_parking_lot(search_term = "") {
                     <td>${parking_lot.city}</td>
                     <td>${parking_lot.state}</td>
                     <td>${parking_lot.map_url}</td>
-                    <td>${parking_lot.four_wheeler_count}</td>
-                    <td>${parking_lot.two_wheeler_count}</td>
+                    <td>${parking_lot.available_four_slots}</td>
+                    <td>Rs.${parking_lot.four_wheeler_price}</td>
+                    <td>${parking_lot.available_two_slots}</td>
 
-                    <td>${parking_lot.two_wheeler_price}</td>
-                    <td>${parking_lot.four_wheeler_price}</td>
+                    <td>Rs.${parking_lot.two_wheeler_price}</td>
+                 
                    
 
                     <td>
@@ -1050,9 +1056,6 @@ function book_now_block() {
     var booking_time = document.getElementById('booking_time').value;
     var vehicle_type = $('input[name="vehicle"]:checked').val();
     var booking_hours = $('#booking_hours').val();
-
-
-
     console.log(vehicle_type, booking_time, id)
     var check_wheeler_type = check_type();
     if (check_wheeler_type == true) {
@@ -1061,6 +1064,48 @@ function book_now_block() {
         var json_data = {
             function_name: 'book_parking_lot',
             user_id: "<?php echo $user_id  ?>",
+            vehicle_type: vehicle_type,
+            booking_time: booking_time,
+            booking_hours: booking_hours,
+            lot_id: id
+        }
+        console.log(json_data);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "<?php echo $site_url ?>/model/lot_model.php");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        var data = JSON.stringify(json_data);
+        xhr.send(data);
+
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // var json_response = JSON.parse(xhr.responseText);
+                console.log(xhr.responseText);
+
+            } else {
+                console.log("Error: " + xhr.status);
+            }
+        };
+
+
+
+
+        //   find_parking_lot();
+
+    }
+}
+
+function check_availablity(params) {
+   var id = document.getElementById('edit_id').value;
+    var booking_time = document.getElementById('booking_time').value;
+    var vehicle_type = $('input[name="vehicle"]:checked').val();
+    var booking_hours = $('#booking_hours').val();
+    console.log(vehicle_type, booking_time, id)
+    var check_wheeler_type = check_type();
+    if (check_wheeler_type == true) {
+        console.log("success");
+      //   $("#edit_modal").hide();
+        var json_data = {
+            function_name: 'check_availablity',
             vehicle_type: vehicle_type,
             booking_time: booking_time,
             booking_hours: booking_hours,

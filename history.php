@@ -410,3 +410,31 @@
 
 </div>
   
+<script>
+
+function get_booking_history(params) {
+   var json_data = {
+            function_name: 'get_booking_history',
+            user_id: "<?php echo $user_id  ?>",
+        }
+        
+        console.log(json_data);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "<?php echo $site_url ?>/model/lot_model.php");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        var data = JSON.stringify(json_data);
+        xhr.send(data);
+
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // var json_response = JSON.parse(xhr.responseText);
+                console.log(xhr.responseText);
+
+            } else {
+                console.log("Error: " + xhr.status);
+            }
+        };
+
+}
+
+</script>

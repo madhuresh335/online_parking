@@ -102,7 +102,7 @@ function book_parking_lot($post)
     $dateTime->modify("+$booking_hour hours");
     $booking_end_timestamp = $dateTime->format('Y-m-d H:i:s');
 
-    $insert_query = "INSERT INTO `op_booking_log`(`lot_id`,`user_id`, `number_of_hours` ,`start_time`, `end_time`) VALUES ('$lot_id','$user_id','$booking_hour','$booking_start_timestamp','$booking_end_timestamp')";
+    $insert_query = "INSERT INTO `op_booking_log`(`lot_id`,`user_id`,`vehicle_type` ,`number_of_hours` ,`start_time`, `end_time`) VALUES ('$lot_id','$user_id','$vehicle_type','$booking_hour','$booking_start_timestamp','$booking_end_timestamp')";
 
     //  echo $insert_query;
 
@@ -113,7 +113,6 @@ function book_parking_lot($post)
         echo "not booking_inserted";
     }
 }
-
 
 function find_parking_lot($post)
 {
@@ -129,25 +128,76 @@ function find_parking_lot($post)
     $lots_details = array();
     foreach ($get_lots as $lots_data) {
         $lot_id = $lots_data['lot_id'];
-        $lots_data['booked'] = get_booked_slot($lot_id);
+        $booked_slot_data = get_booked_slot($lot_id);
+        // print_r($booked_slot_data);
+        $four_wheeler_booking = isset($booked_slot_data['four_wheeler']) ? $booked_slot_data['four_wheeler'] : 0;
+        $two_wheeler_booking = isset($booked_slot_data['two_wheeler']) ? $booked_slot_data['two_wheeler'] : 0;
+        $lots_data['available_four_slots'] = $lots_data['four_wheeler_count'] - $four_wheeler_booking;
+        $lots_data['available_two_slots'] = $lots_data['two_wheeler_count'] - $two_wheeler_booking;
+
         $lots_details[$lot_id] = $lots_data;
     }
-
-
-
-
-
 
     print_r(json_encode($lots_details));
 
 }
 
-function get_booked_slot($lot_id){
+function get_booked_slot($lot_id, $hour = 1)
+{
     global $conn;
-$fetch_booking_query = "SELECT count(*) as booked_slots FROM `op_booking_log` WHERE status not like 'COMPLETED' AND lot_id = '$lot_id'";
-$get_booking_details = mysqli_query($conn, $fetch_booking_query);
-$row = mysqli_fetch_row($get_booking_details);
+    $booking_start_time = date("Y-m-d H:i:s");
+    $booking_end_timestamp = date("Y-m-d H:i:s", strtotime($booking_start_time . " +$hour hours"));
+
+    $fetch_booking_query = "SELECT vehicle_type, COUNT(vehicle_type)  as booked_slots FROM `op_booking_log` WHERE status not like 'COMPLETED' AND lot_id = '$lot_id' AND ((start_time <= '$booking_start_time' and  end_time >= '$booking_end_timestamp' )OR (start_time >= '$booking_start_time' and  start_time <= '$booking_end_timestamp' ) OR (end_time >= '$booking_start_time' and  end_time <= '$booking_end_timestamp' )) GROUP by vehicle_type";
+    // echo $fetch_booking_query ;
+    $get_booking_details = mysqli_query($conn, $fetch_booking_query);
+    $temp_availability = array();
+    foreach ($get_booking_details as $booking) {
+        $booked_v_type = $booking['vehicle_type'];
+        $temp_availability[$booked_v_type] = $booking['booked_slots'];
+    }
+    return $temp_availability;
+
+}
 
 
-return $row[0];
+function check_availablity($post){
+    global $conn;
+    $lot_id = $post['lot_id'];
+    $booking_hour = $post['booking_hours'];
+    $vehicle_type = $post['vehicle_type'];
+    $currentDate = date('Y-m-d');
+    $booking_start_time = $post['booking_time'];
+    $booking_start_timestamp = "$currentDate $booking_start_time:00";
+    $dateTime = new DateTime($booking_start_timestamp);
+    $dateTime->modify("+$booking_hour hours");
+    $booking_end_timestamp = $dateTime->format('Y-m-d H:i:s');
+
+
+    $fetch_booking_query = "SELECT COUNT(vehicle_type)  as booked_slots FROM `op_booking_log` WHERE status not like 'COMPLETED' AND lot_id = '$lot_id' AND ((start_time <= '$booking_start_time' and  end_time >= '$booking_end_timestamp' )OR (start_time >= '$booking_start_time' and  start_time <= '$booking_end_timestamp' ) OR (end_time >= '$booking_start_time' and  end_time <= '$booking_end_timestamp' )) AND vehicle_type = '$vehicle_type'";
+    $get_booking_details = mysqli_query($conn, $fetch_booking_query);
+    $get_booking_details = mysqli_fetch_row($get_booking_details);
+
+if ($vehicle_type == 'two_wheeler') {
+    $column_name = "two_wheeler_count";
+}else{
+    $column_name = "four_wheeler_count";
+}
+   $get_total_slot = " SELECT $column_name FROM `op_lot` where lot_id = $lot_id";
+   $get_slot_details = mysqli_query($conn, $get_total_slot);
+   $get_slot_details = mysqli_fetch_row($get_slot_details);
+    $current_available_slot = $get_slot_details[0] - $get_booking_details[0];
+if ($current_available_slot > 0) {
+   echo true;
+}else{
+    echo false;
+}
+}
+
+function get_booking_history($post){
+    global $conn;
+
+
+ print_r($post);
+
 }
