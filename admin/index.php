@@ -59,9 +59,9 @@
    border-collapse: separate;
    width: 100%;
    display: block;
-   overflow-x: scroll;
-   height: 480px;
-   overflow-y: scroll;
+   overflow-x: auto;
+   height: 510px;
+   overflow-y: auto;
    }
    .listing_block thead td:nth-child(1){
    border-radius: 5px 0 0 5px;
@@ -78,7 +78,7 @@
       background: white;
      }
     .listing_block thead div{
-      width: max-content;
+      width: 117px;
     }
    .listing_block tbody td:nth-child(1){
    padding-left: 10px;
@@ -158,7 +158,7 @@
     color: white;
     border-radius: 30px;
     text-align: center;
-    padding: 2px 24px;
+    padding: 5px 24px;
        width: 100%;
     display: inline-block;
 }
@@ -167,7 +167,7 @@
    color: white;
    border-radius: 30px;
    text-align: center;
-   padding: 2px 18px;
+   padding: 5px 18px;
    display: inline-block;
       width: 100%;
    }
@@ -176,7 +176,7 @@
    color: white;
    border-radius: 30px;
    text-align: center;
-   padding: 2px 18px;
+   padding: 5px 18px;
    display: inline-block;
    width: 100%;
    }
@@ -253,6 +253,12 @@
     margin-left: auto;
 }
 @media(max-width: 767px){
+    .listing_block  td:last-child{
+        position: relative;
+    }
+    .listing_block table td:last-child div {
+    width: 100%;
+}
    .listing_block_wrap{
       flex-wrap: wrap;
    }
@@ -267,12 +273,12 @@
     font-size: 12px;
 }
 .show_advance_filter select {
-    width: 117px;
-    margin-left: 3px;
+    width: 141px;
+    margin-right: 4px;
     }
   .show_advance_filter  .form-control{
-          width: 150px;
-              margin-right: 10px;
+              width: 141px;
+    margin-right: 4px;
     }
     .filter_option_show{
       position: absolute;

@@ -342,13 +342,13 @@ a {
 }
 
 .login-space {
-    min-height: 67vh;
+    min-height: 74vh;
 
 }
 
 .login-box {
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .login-space .group .label {
@@ -502,6 +502,14 @@ a {
 #invalid_user_password{
     display: none;
 }
+.sign-up-form .group .input {
+    background: rgba(255, 255, 255, .9);
+    padding: 6px 11px !important;
+}
+.sign-up-form .group .button {
+    background: #1161ee;
+    padding: 10px;
+}
 </style>
 <div class="login_page_block col-12">
     <div class="row ">
@@ -517,8 +525,8 @@ a {
                         class="tab">Login</label>
                     <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign
                         Up</label>
-                    <div class="login-space mt-4">
-                        <div class="login">
+                    <div class="login-space ">
+                        <div class="login mt-4">
                             <div class="mt-4">
 
 
@@ -566,6 +574,13 @@ a {
                                     placeholder="Enter your Phone Number" onblur="validatephone('phone_number_new')"
                                     maxlength="10" minlength="10">
                                 <div id="phone_number_new_error" class="error"></div>
+                            </div>
+                            
+                             <div class="group">
+                                <label for="email_new" class="label">Email</label>
+                                <input id="email_new" onclick="validateemail('email_new')" type="text"
+                                    class="input  form-control" placeholder="Create your Email">
+                                <div id="email_new_error" class="error"></div>
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Password</label>
@@ -689,6 +704,38 @@ function validatepasswordmatch(text) {
         return false;
     }
 }
+
+
+function validateemail(text) {
+ var value = document.getElementById(text).value;
+
+    var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+    if (value == "") {
+        errorMessage = "Email is required";
+        // setText(textId + '-error', errorMessage);
+      document.getElementById(text + "_error").innerHTML = errorMessage;
+    
+
+        return false;
+    } else if (!emailPattern.test(value)) {
+        errorMessage = "Please enter a valid email address";
+        document.getElementById(text + "_error").innerHTML = errorMessage;
+      
+
+        // setText(textId + '-error', errorMessage);
+
+        return false;
+    } else {
+        // addClass(textId + '-error', 'white');
+        // document.getElementById('pe_email').placeholder = "Enter your email ID";
+
+        // setText(textId + '-error', ' ');
+         errorMessage = "";
+  document.getElementById(text + "_error").innerHTML= errorMessage;
+        return true;
+    }
+}
 function validatepassword(text){
     // return true;
    var value = document.getElementById(text).value;
@@ -722,10 +769,11 @@ function signup() {
     var validate_username = validateuser('username');
     var validate_passwordmatch = validatepasswordmatch('password_renew');
 
+    var validate_email = validateemail('email_new');
 
 
     if (validate_phone_number == true && validate_password == true && validate_username == true &&
-        validate_passwordmatch == true) {
+        validate_passwordmatch == true && validate_email == true) {
 
         var phone_number = $("#phone_number_new").val();
         var json_data = {
@@ -855,6 +903,7 @@ function submit_forgotpassword() {
         window.location = "<?php echo $site_url ?>/forgot-password.php"
     }
 }
+
 </script>
 
 <!-- The Modal -->
