@@ -55,6 +55,7 @@ h2 {
     border-radius: 10px;
     margin-bottom: 30px;
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+    height: 97vh;
 }
 </style>
 <style type="text/css">
@@ -73,6 +74,7 @@ h2 {
     border-collapse: separate;
     height: 450px;
     overflow: auto;
+    display: block;
 }
 
 .listing_block thead td:nth-child(1) {
@@ -301,7 +303,15 @@ td {
         </div>
 
 
-        <table>
+      <style type="text/css">
+            .no_data_block{
+                display: none;
+                font-size: 25px;
+            }
+        </style>
+<div class="no_data_block text-center mt-5 font-weight-bold">No data found</div>
+
+        <table class="table_block">
             <thead>
                 <tr>
                     <td>
@@ -554,6 +564,7 @@ td {
             <div class="row mt-5">
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label>Username</label>
                         <input type="text" class="form-control" name="" placeholder="Username"
                             onblur="validateuser('username')" id="username">
                         <div class="error" id="username_error"></div>
@@ -561,6 +572,7 @@ td {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label>Phone number</label>
                         <input type="text" class="form-control" onblur="validatephone('phone_number')" id="phone_number"
                             minlength="10" maxlength="10"
                             onkeypress='return event.charCode >= 48 && event.charCode <= 57' name=""
@@ -571,6 +583,7 @@ td {
 
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label>Email Address</label>
                         <input type="text" class="form-control" name="" placeholder="Email Address"
                             id="email">
                         <div class="error" id="username_error"></div>
@@ -581,7 +594,7 @@ td {
                     <div class="form-group">
                         <!-- <input type="text" class="form-control" name="" id="role" onblur="validate_role('role')"
                             placeholder="Role"> -->
-
+  <label>Role</label>
                         <select class="form-control" id="role">
                         <option value="2">user</option>
                         <option value="1">Admin</option>
@@ -597,6 +610,7 @@ td {
                
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label>Status</label>
                         <select class="form-control" id="status">
                             <option value="1"> Active</option>
                             <option value="0"> Inactive</option>
@@ -650,7 +664,7 @@ td {
             <div class="row mt-5">
                 <div class="col-md-6">
                     <div class="form-group">
-
+<label>Username</label>
                         <input type="text" class="form-control edit_username" name="" placeholder="Username"
                             onblur="validateuser('username_edit')" id="username_edit" value="">
                         <div class="error" id="username_edit_error"></div>
@@ -658,6 +672,7 @@ td {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label>Phone number</label>
                         <input type="text" class="form-control" onblur="validatephone('phone_number_edit')"
                             id="phone_number_edit" minlength="10" maxlength="10"
                             onkeypress='return event.charCode >= 48 && event.charCode <= 57' name=""
@@ -667,6 +682,7 @@ td {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label>Role</label>
                     <select class="form-control" id="role_edit">
                         <option value="2">user</option>
                         <option value="1">Admin</option>
@@ -678,6 +694,7 @@ td {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label>Status</label>
                         <select class="form-control" id="status_edit">
                             <option value="active"> Active</option>
                             <option value="inactive"> Inactive</option>
@@ -748,6 +765,14 @@ function get_user(search_term = "", role = "", status = "") {
         if (xhr.status === 200) {
             var json_response = JSON.parse(xhr.responseText);
             user_data = json_response;
+            if(user_data == ""){
+               
+                $(".no_data_block").show();
+                $(".table_block").hide();
+            }
+            else{
+                 $(".no_data_block").hide();
+                  $(".table_block").show();
             var table_block = "";
             for (const key in user_data) {
                 const user = user_data[key];
@@ -784,7 +809,7 @@ function get_user(search_term = "", role = "", status = "") {
                         </span>
                     </td></tr>`;
                 document.getElementById('user_table').innerHTML = table_block;
-
+}
             }
         } else {
             console.log("Error: " + xhr.status);

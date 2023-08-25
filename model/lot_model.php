@@ -287,3 +287,29 @@ function get_booking_history_admin($post)
     print_r(json_encode($lots_details));
 
 }
+
+function book_parking_lot($post)
+{
+    global $conn;
+    $currentDate = date('Y-m-d');
+    $lot_id = $post['lot_id'];
+    $vehicle_type = $post['vehicle_type'];
+    $booking_hour = $post['booking_hours'];
+    $booking_start_time = $post['booking_time'];
+    $user_id = $post['user_id'];
+    $booking_start_timestamp = "$currentDate $booking_start_time:00";
+    $dateTime = new DateTime($booking_start_timestamp);
+    $dateTime->modify("+$booking_hour hours");
+    $booking_end_timestamp = $dateTime->format('Y-m-d H:i:s');
+
+    $insert_query = "INSERT INTO `op_booking_log`(`lot_id`,`user_id`,`vehicle_type` ,`number_of_hours` ,`start_time`, `end_time`) VALUES ('$lot_id','$user_id','$vehicle_type','$booking_hour','$booking_start_timestamp','$booking_end_timestamp')";
+
+    //  echo $insert_query;
+
+    $booking_inserted = mysqli_query($conn, $insert_query);
+    if ($booking_inserted) {
+        echo "booking_inserted";
+    } else {
+        echo "not booking_inserted";
+    }
+}

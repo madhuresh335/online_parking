@@ -74,6 +74,7 @@ h2 {
     border-radius: 10px;
     margin-bottom: 30px;
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+    min-height: 96vh;
 }
 </style>
 <style type="text/css">
@@ -379,9 +380,15 @@ select.form-control:not([size]):not([multiple]) {
             </script>
             <!-- <div class="filter_option" onclick="show_filter()">Advance</div> -->
         </div>
+       <style type="text/css">
+            .no_data_block{
+                display: none;
+                font-size: 25px;
+            }
+        </style>
+<div class="no_data_block text-center mt-5 font-weight-bold">No data found</div>
 
-
-        <table>
+        <table class="table_block">
             <thead>
                 <tr>
 
@@ -861,15 +868,15 @@ select.form-control:not([size]):not([multiple]) {
                      </div>
                     <div class="vehicle_type error">Please select the vehicle type</div>
                 </div>
- <div class="col-md-12 mt-4 text-left">
+ <div class="col-md-12 mt-4 text-left mb-4">
                     <label>Price</label>
                     <input type="text" name="" class='form-control' id="book_price" value="" readonly>
                     <span id="book_price_error" class="error"></span>
                 </div>
-                <div class="col-md-12 mt-4">
+               <!--  <div class="col-md-12 mt-4">
                     <button class="cta_btn" onclick="check_availablity()">Check Availablity Now</button>
-                </div>
-
+                </div> -->
+<div class="error text-center m-auto mt-4" style="display: none;" >No booking found</div>
                 <div class="col-md-12 mt-4">
                     <button class="cta_btn" onclick="book_now_block()">Book Now</button>
                 </div>
@@ -931,6 +938,15 @@ function find_parking_lot(search_term = "",vehicle_type = "", booking_hours = "1
             var json_response = JSON.parse(xhr.responseText);
             parking_lot_data = json_response;
             console.log(parking_lot_data);
+            if(parking_lot_data == ""){
+               
+                $(".no_data_block").show();
+                $(".table_block").hide();
+            }
+            else{
+                 $(".no_data_block").hide();
+                  $(".table_block").show();
+
             var table_block = "";
             for (const key in parking_lot_data) {
                 const parking_lot = parking_lot_data[key];
@@ -958,6 +974,7 @@ function find_parking_lot(search_term = "",vehicle_type = "", booking_hours = "1
                 document.getElementById('parking_lot_table').innerHTML = table_block;
 
             }
+        }
         } else {
             console.log("Error: " + xhr.status);
         }

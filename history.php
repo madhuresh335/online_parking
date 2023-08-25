@@ -59,6 +59,7 @@ h2 {
     border-radius: 10px;
     margin-bottom: 30px;
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+    min-height: 95vh;
 }
 </style>
 <style type="text/css">
@@ -248,12 +249,12 @@ h2 {
     <div class="listing_block mr-md-4">
         <div class="d-flex mb-4 listing_block_wrap">
             <h1 class="mb-2"> History</h1>
-            <div class="input-group">
+           <!--  <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search here">
 
-            </div>
-            <div class=" show_advance_filter mt-3 mt-md-0">
-                <div class="d-flex ">
+            </div> -->
+            <div class=" show_advance_filter mt-3 mt-md-0 w-100">
+                <div class="d-flex justify-content-end">
                     <div class="ml-md-3 d-md-flex">
                         <label class="w-100">From Date:</label>
                         <input type="date" name="" placeholder="from date" value="" id="booking_from_date"
@@ -408,9 +409,15 @@ h2 {
             </script>
             <!-- <div class="filter_option" onclick="show_filter()">Advance</div> -->
         </div>
+        <style type="text/css">
+            .no_data_block{
+                display: none;
+                font-size: 25px;
+            }
+        </style>
+<div class="no_data_block text-center mt-5 font-weight-bold">No data found</div>
 
-
-        <table>
+        <table class="table_block">
             <thead>
                 <tr>
 
@@ -420,16 +427,7 @@ h2 {
 
                         </div>
                     </td>
-                    <td>
-                        <div>
-                            Username
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            Phone number
-                        </div>
-                    </td>
+                   
                     <td>
                         <div>
                             Type of vehicle
@@ -468,7 +466,10 @@ h2 {
 
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="parking_lot_table">
+                
+            </tbody>
+          <!--   <tbody>
                 <tr>
 
                     <td>A1</td>
@@ -538,7 +539,7 @@ h2 {
                     </td>
 
                 </tr>
-            </tbody>
+            </tbody> -->
         </table>
     </div>
 
@@ -571,8 +572,8 @@ function yes_btn() {
         xhr.onload = function() {
             if (xhr.status === 200) {
                 // var json_response = JSON.parse(xhr.responseText);
-                console.log(xhr.responseText);
-
+                console.log(xhr.responseText,"cancel_btn");
+get_booking_history();
             } else {
                 console.log("Error: " + xhr.status);
             }
@@ -970,6 +971,7 @@ function reschedule_block(type) {
             if (xhr.status === 200) {
                 // var json_response = JSON.parse(xhr.responseText);
                 console.log(xhr.responseText);
+get_booking_history();
 
             } else {
                 console.log("Error: " + xhr.status);
@@ -1011,9 +1013,79 @@ function get_booking_history(booking_from_date = "", booking_to_date = "") {
     xhr.onload = function() {
         if (xhr.status === 200) {
             parking_lot_data = JSON.parse(xhr.responseText);
-            console.log(parking_lot_data);
+            console.log(parking_lot_data,"parking_lot_data");
             
+            if(parking_lot_data == ""){
+               
+                $(".no_data_block").show();
+                $(".table_block").hide();
+            }
+            else{
+                 $(".no_data_block").hide();
+                  $(".table_block").show();
+ var table_block = "";
+            for (const key in parking_lot_data) {
+                const parking_lot = parking_lot_data[key];
+                table_block += `<tr>
 
+                    <td>${parking_lot.lot_id}</td>
+                    <td>${parking_lot.vehicle_type}</td>
+                    <td>${parking_lot.booking_time}</td>
+                    <td>${parking_lot.start_time}</td>
+                    <td>${parking_lot.end_time}</td>
+                    <td>${parking_lot.number_of_hours}</td>
+                    <td>${parking_lot.price}</td>`;
+
+                  if(parking_lot.status == 'BOOKED'){
+   table_block += ` 
+
+<td>
+                        <div class="booked_block">${parking_lot.status}</div>
+                        <div class="d-flex canceled_block mt-2">
+                            <span onclick="cancel_book(${parking_lot.booking_id})">cancel</span>
+                            <span onclick="book_parking(${parking_lot.booking_id})">reschedule</span>
+                        </div>
+
+                    </td>
+`;
+}
+ if(parking_lot.status == 'COMPLETED'){
+table_block += ` 
+
+<td>
+                        <div class="active_block">${parking_lot.status}</div>
+                        
+
+                    </td>`;
+}
+     if(parking_lot.status == 'CANCELLED'){
+        table_block += ` 
+
+<td>
+                        <div class="cancel_block">${parking_lot.status}</div>
+                        
+
+                    </td>`;
+    
+}                
+                 
+                   
+   if(parking_lot.status == 'PROCESSING'){
+        table_block += ` 
+
+<td>
+                        <div class="inactive_block">${parking_lot.status}</div>
+                        
+
+                    </td>`;
+    
+} 
+                
+               table_block += `</tr>`;
+                document.getElementById('parking_lot_table').innerHTML = table_block;
+
+         }
+     }
         } else {
             console.log("Error: " + xhr.status);
         }

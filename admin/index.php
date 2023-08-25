@@ -43,6 +43,7 @@
    border-radius: 10px;
    margin-bottom: 30px;
    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+   min-height: 97vh;
    }
 </style>
 <style type="text/css">
@@ -162,15 +163,15 @@
        width: 100%;
     display: inline-block;
 }
-.inactive_block{
- background: #ff4d4d;
-   color: white;
-   border-radius: 30px;
-   text-align: center;
-   padding: 5px 18px;
-   display: inline-block;
-      width: 100%;
-   }
+.inactive_block {
+    background: blue;
+    color: white;
+    border-radius: 30px;
+    text-align: center;
+    padding: 5px 18px;
+    display: inline-block;
+    width: 100%;
+}
    .booked_block{
      background: orange;
    color: white;
@@ -180,6 +181,23 @@
    display: inline-block;
    width: 100%;
    }
+   .cancel_block {
+    background: #ff4d4d;
+    color: white;
+    border-radius: 30px;
+    text-align: center;
+    padding: 5px 18px;
+    display: inline-block;
+    width: 100%;
+}
+.canceled_block span {
+    font-size: 14px;
+    margin-right: 10px;
+    color: blue;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
 </style>
 <div class="">
    <?php include('sidebar.php');?>
@@ -319,7 +337,15 @@
       </div>
 
      
-      <table>
+<style type="text/css">
+            .no_data_block{
+                display: none;
+                font-size: 25px;
+            }
+        </style>
+<div class="no_data_block text-center mt-5 font-weight-bold">No data found</div>
+
+        <table class="table_block">
          <thead>
             <tr>
                
@@ -377,7 +403,8 @@
                
             </tr>
          </thead>
-         <tbody>
+         <tbody id="parking_lot_table"></tbody>
+        <!--  <tbody>
             <tr>
               
                <td>A1</td>
@@ -420,7 +447,7 @@
               <td><div class="inactive_block">PROCESSING</div></td>
                  
            </tr>
-      </tbody>
+      </tbody> -->
       </table>
    </div>
 
@@ -461,9 +488,77 @@ function get_booking_history(booking_from_date = "", booking_to_date = "", searc
         if (xhr.status === 200) {
          console.log(xhr.responseText);
             parking_lot_data = JSON.parse(xhr.responseText);
-            //console.log(xhr.responseText);
-            
+            console.log(parking_lot_data,"parking_lot_data");
+            if(parking_lot_data == ""){
+               
+                $(".no_data_block").show();
+                $(".table_block").hide();
+            }
+            else{
+                 $(".no_data_block").hide();
+                  $(".table_block").show();
+var table_block = "";
+            for (const key in parking_lot_data) {
+                const parking_lot = parking_lot_data[key];
+                table_block += `<tr>
 
+                    <td>${parking_lot.lot_id}</td>
+                      <td>${parking_lot.user_name}</td>
+                      <td>${parking_lot.phone_number}</td>
+                    <td>${parking_lot.vehicle_type}</td>
+                    <td>${parking_lot.booking_time}</td>
+                    <td>${parking_lot.start_time}</td>
+                    <td>${parking_lot.end_time}</td>
+                    <td>${parking_lot.number_of_hours}</td>
+                    <td>${parking_lot.price}</td>`;
+
+                  if(parking_lot.status == 'BOOKED'){
+   table_block += ` 
+
+<td>
+                        <div class="booked_block">${parking_lot.status}</div>
+                       
+
+                    </td>
+`;
+}
+ if(parking_lot.status == 'COMPLETED'){
+table_block += ` 
+
+<td>
+                        <div class="active_block">${parking_lot.status}</div>
+                        
+
+                    </td>`;
+}
+     if(parking_lot.status == 'CANCELLED'){
+        table_block += ` 
+
+<td>
+                        <div class="cancel_block">${parking_lot.status}</div>
+                        
+
+                    </td>`;
+    
+}                
+                 
+                   
+   if(parking_lot.status == 'PROCESSING'){
+        table_block += ` 
+
+<td>
+                        <div class="inactive_block">${parking_lot.status}</div>
+                        
+
+                    </td>`;
+    
+} 
+                
+               table_block += `</tr>`;
+                document.getElementById('parking_lot_table').innerHTML = table_block;
+
+         }
+     }
         } else {
             console.log("Error: " + xhr.status);
         }

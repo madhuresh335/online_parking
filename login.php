@@ -565,7 +565,7 @@ a {
                             <div class="group">
                                 <label class="label">Username</label>
                                 <input id="username" type="text" class="input  form-control"
-                                    placeholder="Create your Username" onclick="validateuser('username')">
+                                    placeholder="Create your Username" onblur="validateuser('username')">
                                 <div id="username_error" class="error"></div>
                             </div>
                             <div class="group">
@@ -578,19 +578,19 @@ a {
                             
                              <div class="group">
                                 <label for="email_new" class="label">Email</label>
-                                <input id="email_new" onclick="validateemail('email_new')" type="text"
+                                <input id="email_new" onblur="validateemail('email_new')" type="text"
                                     class="input  form-control" placeholder="Create your Email">
                                 <div id="email_new_error" class="error"></div>
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Password</label>
-                                <input id="password_new" onclick="validatepassword('password_new')" type="password"
+                                <input id="password_new" onblur="validatepassword('password_new')" type="password"
                                     class="input  form-control" placeholder="Create your password">
                                 <div id="password_new_error" class="error"></div>
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Repeat Password</label>
-                                <input id="password_renew" onclick="validatepasswordmatch('password_renew')"
+                                <input id="password_renew" onblur="validatepasswordmatch('password_renew')"
                                     type="password" class="input  form-control" data-type="password"
                                     placeholder="Repeat your password">
                                 <div id="password_renew_error" class="error"></div>
@@ -617,7 +617,7 @@ a {
             <div class="group">
                 <label class="label">Enter the OTP</label>
                 <input id="otp" type="text" class="input  form-control" placeholder="Enter the otp"
-                    onclick="validateotp('otp')">
+                    >
                 <div id="otp_error" class="error"></div>
             </div>
             <div class="group mt-4">
@@ -635,7 +635,7 @@ a {
             <div class="group">
                 <label class="label">Enter the phone number</label>
                 <input id="phone_number_password" type="text" class="input  form-control"
-                    placeholder="Enter the phone number" onclick="validatephone('phone_number_password')" minlength="10"
+                    placeholder="Enter the phone number" onblur="validatephone('phone_number_password')" minlength="10"
                     maxlength="10">
                 <div id="phone_number_password_error" class="error"></div>
             </div>

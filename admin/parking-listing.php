@@ -62,6 +62,7 @@ h2 {
     border-radius: 10px;
     margin-bottom: 30px;
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+    min-height: 97vh;
 }
 </style>
 <style type="text/css">
@@ -298,7 +299,15 @@ h2 {
         </script>
 
 
-        <table>
+       <style type="text/css">
+            .no_data_block{
+                display: none;
+                font-size: 25px;
+            }
+        </style>
+<div class="no_data_block text-center mt-5 font-weight-bold">No data found</div>
+
+        <table class="table_block">
             <thead>
                 <tr>
 
@@ -354,11 +363,7 @@ h2 {
                             4 wheeler price
                         </div>
                     </td>
-                    <td>
-                        <div>
-                            Handler id
-                        </div>
-                    </td>
+                    
                     <td>
                         <div>
                             Action
@@ -518,7 +523,7 @@ h2 {
 }
 
 .form-group {
-    margin-bottom: 35px;
+    margin-bottom: 20px;
 }
 
 .cta_btn {
@@ -565,6 +570,7 @@ h2 {
             <div class="row mt-5">
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label>Lot Name</label>
                         <input type="text" class="form-control" name="" id="lot_name"
                             onblur="validatefield('lot_name','lot name is required') " placeholder="Lot Name">
                         <div class="error" id="lot_name_error"></div>
@@ -572,6 +578,7 @@ h2 {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                          <label>Street Address</label>
                         <input type="text" class="form-control" name="" id="street"
                             onblur="validatefield('street','Street name is required')" placeholder="Street Address
                ">
@@ -580,6 +587,7 @@ h2 {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                          <label>Zipcode</label>
                         <input type="text" class="form-control" name="" placeholder="Zipcode" inputmode="numeric"
                             minlength="6" maxlength="6" id="zipcode" onblur="validatezipcode('zipcode')">
                         <div class="error" id="zipcode_error"></div>
@@ -587,6 +595,7 @@ h2 {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                          <label>City</label>
                         <input type="text" class="form-control" name="" placeholder="City" id="City"
                             onblur="validatefield('City','City name is required')">
                         <div class="error" id="City_error"></div>
@@ -594,6 +603,7 @@ h2 {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                          <label>State</label>
                         <input type="text" class="form-control" name="" placeholder="State" id="State"
                             onblur="validatefield('State','State name is required')">
                         <div class="error" id="State_error"></div>
@@ -601,6 +611,7 @@ h2 {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                          <label>Map url</label>
                         <input type="text" class="form-control" name="" placeholder="Map url" id="Map_url"
                             onblur="validatefield('Map_url','Map url is required')">
                         <div class="error" id="Map_url_error"></div>
@@ -608,6 +619,7 @@ h2 {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                          <label>Total 4 Wheeler Slot</label>
                         <input type="text" class="form-control" name="" placeholder="Total 4 Wheeler Slot"
                             id="4_wheeler" onblur="validatefield('4_wheeler','4 Wheeler Slot is required')">
                         <div class="error" id="4_wheeler_error"></div>
@@ -615,6 +627,7 @@ h2 {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                          <label>Total 2 Wheeler Slot</label>
                         <input type="text" class="form-control" name="" placeholder="Total 2 Wheeler Slot"
                             id="2_wheeler" onblur="validatefield('2_wheeler','2 Wheeler Slot is required')">
                         <div class="error" id="2_wheeler_error"></div>
@@ -623,6 +636,7 @@ h2 {
 
                 <div class="col-md-6">
                     <div class="form-group">
+                          <label>2 Wheeler Price</label>
                         <input type="text" class="form-control" name="" placeholder="2 Wheeler Price" id="2_price"
                             onblur="validatefield('2_price','2 wheeler price  is required')">
                         <div class="error" id="2_price_error"></div>
@@ -630,6 +644,7 @@ h2 {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                          <label>4 Wheeler Price</label>
                         <input type="text" class="form-control" name="" placeholder="4 Wheeler Price
                " id="4_price" onblur="validatefield('4_price','4 wheeler price  is required')" value="">
                         <div class="error" id="4_price_error"></div>
@@ -705,6 +720,7 @@ h2 {
             <div class="row mt-5">
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label>Lot Name</label>
                         <input type="text" class="form-control" name="" id="lot_name_edit"
                             onblur="validatefield('lot_name_edit','lot name is required') " placeholder="Lot Name">
                         <div class="error" id="lot_name_edit_error"></div>
@@ -712,6 +728,7 @@ h2 {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                         <label>Street Address</label>
                         <input type="text" class="form-control" name="" id="street_edit"
                             onblur="validatefield('street_edit','Street name is required')" placeholder="Street Address
                ">
@@ -720,6 +737,7 @@ h2 {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                         <label>Zipcode</label>
                         <input type="text" class="form-control" name="" placeholder="Zipcode" inputmode="numeric"
                             minlength="6" maxlength="6" id="zipcode_edit" onblur="validatezipcode('zipcode_edit')">
                         <div class="error" id="zipcode_edit_error"></div>
@@ -727,6 +745,7 @@ h2 {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                         <label>City</label>
                         <input type="text" class="form-control" name="" placeholder="City" id="City_edit"
                             onblur="validatefield('City_edit','City name is required')">
                         <div class="error" id="City_edit_error"></div>
@@ -734,6 +753,7 @@ h2 {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                         <label>State</label>
                         <input type="text" class="form-control" name="" placeholder="State" id="State_edit"
                             onblur="validatefield('State_edit','State name is required')">
                         <div class="error" id="State_edit_error"></div>
@@ -741,6 +761,7 @@ h2 {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                         <label>Map url</label>
                         <input type="text" class="form-control" name="" placeholder="Map url" id="Map_url_edit"
                             onblur="validatefield('Map_url_edit','Map url is required')">
                         <div class="error" id="Map_url_edit_error"></div>
@@ -748,6 +769,7 @@ h2 {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                         <label>Total 4 Wheeler Slot</label>
                         <input type="text" class="form-control" name="" placeholder="Total 4 Wheeler Slot"
                             id="4_wheeler_edit" onblur="validatefield('4_wheeler_edit','4 Wheeler Slot is required')">
                         <div class="error" id="4_wheeler_edit_error"></div>
@@ -755,6 +777,7 @@ h2 {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                         <label>Total 2 Wheeler Slot</label>
                         <input type="text" class="form-control" name="" placeholder="Total 2 Wheeler Slot"
                             id="2_wheeler_edit" onblur="validatefield('2_wheeler_edit','2 Wheeler Slot is required')">
                         <div class="error" id="2_wheeler_edit_error"></div>
@@ -763,6 +786,7 @@ h2 {
 
                 <div class="col-md-6">
                     <div class="form-group">
+                         <label>2 Wheeler Price</label>
                         <input type="text" class="form-control" name="" placeholder="2 Wheeler Price" id="2_price_edit"
                             onblur="validatefield('2_price_edit','2 wheeler price  is required')">
                         <div class="error" id="2_price_edit_error"></div>
@@ -770,6 +794,7 @@ h2 {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                         <label>4 Wheeler Price</label>
                         <input type="text" class="form-control" name="" placeholder="4 Wheeler Price
                " id="4_price_edit" onblur="validatefield('4_price_edit','4 wheeler price  is required')" value="">
                         <div class="error" id="4_price_edit_error"></div>
@@ -859,7 +884,7 @@ function edit_parking_lot(id) {
        $('#4_wheeler_edit').val(parking_data.four_wheeler_count);
        $('#2_price_edit').val(parking_data.two_wheeler_price);
          $('#4_price_edit').val(parking_data.four_wheeler_count);
-        $('#input_edit').val(parking_data.handler);
+        // $('#input_edit').val(parking_data.handler);
     $("#edit_modal").show();
 }
 
@@ -918,11 +943,11 @@ function add_parking_lot() {
     var four_wheeler = validatefield('4_wheeler', '4_wheeler is required');
     var two_price = validatefield('2_price', ' 2_price is required');
     var four_price = validatefield('4_price', '4_price is required');
-    var handler = validatefield('input', ' handler is required');
+    // var handler = validatefield('input', ' handler is required');
     var zipcode = validatezipcode('zipcode');
     if (lotname == true && street == true && City == true && State == true && State == true && Map_url == true &&
-        two_wheeler == true && four_wheeler == true && two_price == true && four_price == true && zipcode == true &&
-        handler == true) {
+        two_wheeler == true && four_wheeler == true && two_price == true && four_price == true && zipcode == true 
+        ) {
         var lotname_val = $('#lot_name').val();
         var street_val = $('#street').val();
         var city_val = $('#City').val();
@@ -933,7 +958,7 @@ function add_parking_lot() {
         var four_wheeler_val = $('#4_wheeler').val();
         var two_price_val = $('#2_price').val();
         var four_price_val = $('#4_price').val();
-        var handler_val = $('#input').val();
+       
 
         var json_data = {
             "lotname":lotname_val,
@@ -946,7 +971,7 @@ function add_parking_lot() {
             "four_wheeler_count":four_wheeler_val,
             "two_wheeler_price":two_price_val,
             "four_wheeler_price":four_price_val,
-            "handler":handler_val,
+         
             function_name: 'add_parking_lot'
         };
         var xhr = new XMLHttpRequest();
@@ -985,11 +1010,10 @@ function update_parking_lot() {
     var four_wheeler = validatefield('4_wheeler_edit', '4_wheeler is required');
     var two_price = validatefield('2_price_edit', ' 2_price is required');
     var four_price = validatefield('4_price_edit', '4_price is required');
-    var handler = validatefield('input_edit', ' handler is required');
+   
     var zipcode = validatezipcode('zipcode_edit');
     if (lotname == true && street == true && City == true && State == true && State == true && Map_url == true &&
-        two_wheeler == true && four_wheeler == true && two_price == true && four_price == true && zipcode == true &&
-        handler == true) {
+        two_wheeler == true && four_wheeler == true && two_price == true && four_price == true && zipcode == true ) {
 
         var lotname_val_edit = $('#lot_name_edit').val();
         var street_val_edit= $('#street_edit').val();
@@ -1001,7 +1025,7 @@ function update_parking_lot() {
         var four_wheeler_val_edit = $('#4_wheeler_edit').val();
         var two_price_val_edit = $('#2_price_edit').val();
         var four_price_val_edit = $('#4_price_edit').val();
-        var handler_val_edit = $('#input_edit').val();
+        
 
          var json_data = {
             "lot_id" :id,
@@ -1015,7 +1039,7 @@ function update_parking_lot() {
             "four_wheeler_count":four_wheeler_val_edit,
             "two_wheeler_price":two_price_val_edit,
             "four_wheeler_price":four_price_val_edit,
-            "handler":handler_val_edit,
+            
             function_name: 'update_parking_lot'
       }
         var xhr = new XMLHttpRequest();
@@ -1114,6 +1138,14 @@ function get_parking_lot(search_term = "") {
                   console.log(xhr.responseText);
                   parking_lot_data = json_response;
                   console.log(parking_lot_data);
+                  if(parking_lot_data == ""){
+               
+                $(".no_data_block").show();
+                $(".table_block").hide();
+            }
+            else{
+                 $(".no_data_block").hide();
+                  $(".table_block").show();
                   var table_block ="";
    for (const key in parking_lot_data) {
     const parking_lot = parking_lot_data[key];
@@ -1130,7 +1162,7 @@ function get_parking_lot(search_term = "") {
 
                     <td>${parking_lot.two_wheeler_price}</td>
                     <td>${parking_lot.four_wheeler_price}</td>
-                    <td>${parking_lot.handler}</td>
+                   
 
                     <td>
                         <span class="mr-1">
@@ -1149,6 +1181,7 @@ function get_parking_lot(search_term = "") {
                 </tr>`;
                     document.getElementById('parking_lot_table').innerHTML = table_block;
 
+}
 }
             } else {
                 console.log("Error: " + xhr.status);
@@ -1359,111 +1392,7 @@ option:hover,  .active{
     background-color: lightblue;
 }
 </style>
-<script id="rendered-js">
-input.onfocus = function() {
-    handler.style.display = 'block';
-    input.style.borderRadius = "5px 5px 0 0";
-};
-for (let option of handler.options) {
-    option.onclick = function() {
-        input.value = option.value;
-        handler.style.display = 'none';
-        input.style.borderRadius = "5px";
-    };
-};
-
-input.oninput = function() {
-    currentFocus = -1;
-    var text = input.value.toUpperCase();
-    for (let option of handler.options) {
-        if (option.value.toUpperCase().indexOf(text) > -1) {
-            option.style.display = "block";
-        } else {
-            option.style.display = "none";
-        }
-    };
-};
-var currentFocus = -1;
-input.onkeydown = function(e) {
-    if (e.keyCode == 40) {
-        currentFocus++;
-        addActive(handler.options);
-    } else
-    if (e.keyCode == 38) {
-        currentFocus--;
-        addActive(handler.options);
-    } else
-    if (e.keyCode == 13) {
-        e.preventDefault();
-        if (currentFocus > -1) {
-            /*and simulate a click on the "active" item:*/
-            if (handler.options) handler.options[currentFocus].click();
-        }
-    }
-};
-
-function addActive(x) {
-    if (!x) return false;
-    removeActive(x);
-    if (currentFocus >= x.length) currentFocus = 0;
-    if (currentFocus < 0) currentFocus = x.length - 1;
-    x[currentFocus].classList.add("active");
-}
-
-function removeActive(x) {
-    for (var i = 0; i < x.length; i++) {
-        if (window.CP.shouldStopExecution(0)) break;
-        x[i].classList.remove("active");
-    }
-    window.CP.exitedLoop(0);
-}
-//# sourceURL=pen.js
-
-
-
-
-input_edit.onfocus = function() {
-    handler_edit.style.display = 'block';
-    input_edit.style.borderRadius = "5px 5px 0 0";
-};
-for (let option of handler_edit.options) {
-    option.onclick = function() {
-        input_edit.value = option.value;
-        handler_edit.style.display = 'none';
-        input_edit.style.borderRadius = "5px";
-    };
-};
-
-input_edit.oninput = function() {
-    currentFocus = -1;
-    var text = input_edit.value.toUpperCase();
-    for (let option of handler_edit.options) {
-        if (option.value.toUpperCase().indexOf(text) > -1) {
-            option.style.display = "block";
-        } else {
-            option.style.display = "none";
-        }
-    };
-};
-var currentFocus = -1;
-input.onkeydown = function(e) {
-    if (e.keyCode == 40) {
-        currentFocus++;
-        addActive(handler_edit.options);
-    } else
-    if (e.keyCode == 38) {
-        currentFocus--;
-        addActive(handler_edit.options);
-    } else
-    if (e.keyCode == 13) {
-        e.preventDefault();
-        if (currentFocus > -1) {
-            /*and simulate a click on the "active" item:*/
-            if (handler_edit.options) handler.options[currentFocus].click();
-        }
-    }
-};
-
+<script type="text/javascript">
 function filter_lot(){
     var search_term = $("#search_term").val();
     console.log(search_term);
