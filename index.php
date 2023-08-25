@@ -132,7 +132,7 @@ h2 {
     border-top: 1px solid #e5ecff !important;
     border-bottom: 1px solid #e5ecff !important;
     font-weight: 600;
-    color: #474d58;
+    color: #000000;
     text-transform: capitalize;
 }
 
@@ -143,7 +143,7 @@ h2 {
 }
 
 .listing_block tbody td {
-    color: #888;
+    color: #000;
     padding: 14px 10px;
     font-size: 16px;
 }
@@ -210,7 +210,7 @@ select.form-control:not([size]):not([multiple]) {
 @media(min-width: 1199px){
     .show_advance_filter .form-control {
     padding: 4px 20px;
-    width: 160px;
+    width: 200px;
     margin-right: 21px;
 }
 .show_advance_filter select{
@@ -230,16 +230,11 @@ select.form-control:not([size]):not([multiple]) {
                 <div class="d-flex ">
                     <div class="">
                         <label class="w-100">Search</label>
-                <input type="text" class="form-control" placeholder="Search here">
-           
-            </div>
-                    <div class="">
-                        <label class="w-100">Zipcode state</label>
-                        <input type="text" name="" placeholder="Zipcode state" id="search_term" value="" class="form-control">
+                        <input type="text" name="" placeholder="Search location or zip" id="search_term" value="" class="form-control">
                     </div>
                     <div class="ml-md-3 ">
-                        <label class="w-100">From Date:</label>
-                        <input type="" name="" placeholder="from date" value="" class="form-control">
+                        <label class="w-100">Booking Time:</label>
+                        <input type="" name="" placeholder="Parking Date" value=""  id="search_date" class="form-control">
                     </div>
                     <div class="ml-md-3 ">
                         <label class="w-100">parking hours</label>
@@ -248,11 +243,11 @@ select.form-control:not([size]):not([multiple]) {
                             onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57">
                     </div>
                     <div class="ml-md-3 ">
-                        <label class="w-100">Select Wheeler Type</label>
+                        <label class="w-100">Select Vehicle Type</label>
                         <select class="form-control" id="search_vechicle_type">
 
-                            <option value="2">2 Wheeler</option>
-                            <option value="4">4 Wheeler</option>
+                            <option value="two_wheeler">2 Wheeler</option>
+                            <option value="four_wheeler">4 Wheeler</option>
                         </select>
                     </div>
 
@@ -536,7 +531,7 @@ select.form-control:not([size]):not([multiple]) {
     background-color: #fefefe;
     margin: auto;
     padding: 0;
-    border: 1px solid #888;
+    border: 1px solid #000;
     width: 80%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-animation-name: animatetop;
@@ -832,7 +827,7 @@ select.form-control:not([size]):not([multiple]) {
          $current_time = date("H:i");
          $max_time = date("H:i", strtotime("+2 hours"));
  ?>
-                    <input class='form-control' type="time" id="booking_time"  min="16:00" max="22:00"value="<?php echo  $current_time?>">
+                    <input class='form-control' type="time" id="booking_time"  min="00:00" max="24:00"value="<?php echo  $current_time?>">
                 </div>
                 <div class="col-md-6">
                     <label>Number of Hours</label>
@@ -916,10 +911,13 @@ select.form-control:not([size]):not([multiple]) {
 find_parking_lot();
 var parking_lot_data;
 
-function find_parking_lot(search_term = "") {
+function find_parking_lot(search_term = "",vehicle_type = "", booking_hours = "1") {
     var json_data = {
         function_name: 'find_parking_lot',
-        search_term: search_term
+        search_term: search_term,
+        vehicle_type:vehicle_type,
+        booking_hours:booking_hours,
+
     }
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "<?php echo $site_url ?>/model/lot_model.php");
@@ -1169,7 +1167,11 @@ function check_type(x) {
 }
 
 function filter_parking() {
-  
+    var search_term =     $("#search_term").val();
+    var booking_hours =     $("#search_parking_hour").val();
+    var vehicle_type =     $("#search_vechicle_type").val();
+    
+    find_parking_lot(search_term,vehicle_type, booking_hours)
    
 }
 

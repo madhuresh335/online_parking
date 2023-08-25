@@ -422,7 +422,7 @@ a {
     background-color: #fefefe;
     margin: auto;
     padding: 0;
-    border: 1px solid #888;
+    border: 1px solid #000;
     width: 80%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-animation-name: animatetop;
@@ -672,7 +672,7 @@ function login() {
 				if (json_response.status == "success") {
 					setLoginCookie(json_response.user_name,phone_number, json_response.user_id, expires=1)
 					if (json_response.g == 1) {
-						window.location = "<?php echo $site_url ?>/admin/";
+						 window.location = "<?php echo $site_url ?>/admin/";
 					}else if(json_response.g == 2){
 						window.location = "<?php echo $site_url ?>/";
 					}
@@ -750,9 +750,8 @@ function validatepassword(text){
 
    else if(!pattern.test(value)) {
 
-    errorMessage = "password is not validate required";
+    errorMessage = "password must contain AlphaNumeric and special characters(@$!%*?&)";
    document.getElementById(text + "_error").innerHTML = errorMessage;
-    console.log("password is not validate required")
       return false;
   }
    else {
@@ -864,10 +863,12 @@ async function submit_otp() {
         var phone_number = $("#phone_number_new").val();
         var password = $("#password_new").val();
         var username = $("#username").val();
+        var email = $("#email_new").val();
         var json_data = {
             phone_number: phone_number,
             password: password,
             username: username,
+            email:email,
             function_name: 'register_user'
         };
         var xhr = new XMLHttpRequest();
@@ -894,13 +895,39 @@ function close_modal(x) {
 }
 
 function forgotpassword() {
+
+    
+
     $("#modal_forgot_password").show();
 }
 
 function submit_forgotpassword() {
     var phone_number = validatephone("phone_number_password");
     if (phone_number == true) {
-        window.location = "<?php echo $site_url ?>/forgot-password.php"
+
+        var phone_number = $("#phone_number_password").val();
+        var json_data = {
+            phone_number: phone_number,
+            function_name: 'send_otp'
+        };
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "<?php echo $site_url ?>/model/user_model.php");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        var data = JSON.stringify(json_data);
+        xhr.send(data);
+
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // var data = JSON.parse(xhr.responseText);
+                console.log(xhr.responseText);
+                window.location = "<?php echo $site_url ?>/forgot-password.php"
+
+            } else {
+                console.log("Error: " + xhr.status);
+            }
+        };
+
+
     }
 }
 

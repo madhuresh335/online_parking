@@ -93,7 +93,7 @@ h2 {
     border-top: 1px solid #e5ecff !important;
     border-bottom: 1px solid #e5ecff !important;
     font-weight: 600;
-    color: #474d58;
+    color: #000000;
     text-transform: capitalize;
 }
 
@@ -104,7 +104,7 @@ h2 {
 }
 
 .listing_block tbody td {
-    color: #888;
+    color: #000;
     padding: 14px 10px;
     font-size: 16px;
 }
@@ -440,7 +440,7 @@ td {
     background-color: #fefefe;
     margin: auto;
     padding: 0;
-    border: 1px solid #888;
+    border: 1px solid #000;
     width: 80%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-animation-name: animatetop;
@@ -568,18 +568,38 @@ td {
                         <div class="error" id="phone_number_error"></div>
                     </div>
                 </div>
+
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="" id="role" onblur="validate_role('role')"
-                            placeholder="Role">
+                        <input type="text" class="form-control" name="" placeholder="Email Address"
+                            id="email">
+                        <div class="error" id="username_error"></div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <!-- <input type="text" class="form-control" name="" id="role" onblur="validate_role('role')"
+                            placeholder="Role"> -->
+
+                        <select class="form-control" id="role">
+                        <option value="2">user</option>
+                        <option value="1">Admin</option>
+                       
+                    </select>
+
+
                         <div class="error" id="role_error"></div>
                     </div>
                 </div>
+
+
+               
                 <div class="col-md-6">
                     <div class="form-group">
                         <select class="form-control" id="status">
-                            <option value="active"> Active</option>
-                            <option value="inactive"> Inactive</option>
+                            <option value="1"> Active</option>
+                            <option value="0"> Inactive</option>
                         </select>
                         <!-- <input type="text" name="" placeholder="Status"> -->
                     </div>
@@ -647,8 +667,12 @@ td {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="" id="role_edit"
-                            onblur="validate_role('role_edit')" placeholder="Role">
+                    <select class="form-control" id="role_edit">
+                        <option value="2">user</option>
+                        <option value="1">Admin</option>
+                       
+                    </select>
+
                         <div class="error" id="role_edit_error"></div>
                     </div>
                 </div>
@@ -785,8 +809,18 @@ function edit_user(x) {
 
     $("#username_edit").val(user.name);
     $("#phone_number_edit").val(x);
-    $("#role_edit").val(user.role);
-    if (user.active == 0) {
+    
+    if (user.role != "user") {
+    $("#role_edit").val(1);   
+    }else{
+        $("#role_edit").val(2);
+    }
+   
+
+
+
+
+    if (user.active == 'Active') {
         $("#status_edit").val("active");
     } else {
         $("#status_edit").val("inactive");
@@ -826,9 +860,10 @@ function validate_role(text) {
 function add_new_user() {
     var username = validateuser('username');
     var phonenumber = validatephone('phone_number');
-    var role = validate_role('role');
+    var role = document.getElementById('role').value;
     var status = document.getElementById('status').value;
-    if (username == true && phonenumber == true && role == true) {
+    var email = document.getElementById('email').value;
+    if (username == true && phonenumber == true ) {
 
 
         var phone_number = $("#phone_number").val();
@@ -836,8 +871,12 @@ function add_new_user() {
         var json_data = {
             phone_number: phone_number,
             username: username,
+            role:role,
+            email:email,
+            status:status,
             function_name: 'register_user'
         };
+
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "<?php echo $site_url ?>/model/user_model.php");
         xhr.setRequestHeader("Content-Type", "application/json");
@@ -846,6 +885,7 @@ function add_new_user() {
 
         xhr.onload = function() {
             if (xhr.status === 200) {
+                console.log(xhr.responseText);
                 var json_response = JSON.parse(xhr.responseText);
                 console.log(json_response);
                 get_user();
@@ -862,11 +902,10 @@ function add_new_user() {
 function edit_new_user() {
     var username = validateuser('username_edit');
     var phonenumber = validatephone('phone_number_edit');
-    var role = validate_role('role_edit');
     var status = document.getElementById('status_edit').value;
     var id = document.getElementById('edit_id').value;
 
-    if (username == true && phonenumber == true && role == true) {
+    if (username == true && phonenumber == true) {
 
         var status = $("#status_edit").val();
         var role = $("#role_edit").val();
@@ -880,6 +919,7 @@ function edit_new_user() {
             username: username,
             function_name: 'edit_user'
         };
+
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "<?php echo $site_url ?>/model/user_model.php");
         xhr.setRequestHeader("Content-Type", "application/json");

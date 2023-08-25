@@ -93,7 +93,7 @@
    border-top: 1px solid #e5ecff!important;
    border-bottom: 1px solid #e5ecff!important;
    font-weight: 600;
-   color: #474d58;
+   color: #000000;
    text-transform: capitalize;
    }
    .listing_block thead td:last-child {
@@ -102,7 +102,7 @@
    padding-right: 40px;
    }
    .listing_block tbody td{
-   color: #888;
+   color: #000;
    padding: 14px 10px;
    font-size: 16px;
    }
@@ -189,22 +189,22 @@
       <div class="d-flex mb-4 listing_block_wrap">
           <h1 class="mb-2"> History</h1>
             <div class="input-group">
-    <input type="text" class="form-control" placeholder="Search here">
+    <input type="text" class="form-control" placeholder="Search here" id="search_term">
     
   </div>
   <div class=" show_advance_filter mt-3 mt-md-0">
      <div class="d-flex ">
       <div class="ml-md-3 d-md-flex">
          <label class="w-100">From Date:</label>
-          <input type="date"  name="" placeholder="from date" value="" class="form-control">
+          <input type="date"  name="" placeholder="from date"  id="booking_from_date" value="" class="form-control">
       </div>
      <div class="ml-md-3 d-md-flex">
          <label class="w-100">To Date:</label>
-         <input type="date"  name="" placeholder="to date" class="form-control"> 
+         <input type="date"  name="" placeholder="to date" id="booking_to_date"  class="form-control"> 
       </div>
        
         
-        <button type="button" class="btn add_btn cta_btn ml-2 mt-4 mt-md-0">GO</button>
+        <button type="button" class="btn add_btn cta_btn ml-2 mt-4 mt-md-0" onclick="filter_log()" >GO</button>
   <!--         <div class=" filter_option_show" onclick="hide_filter()">Hide Advance</div> -->
      </div>
   </div>
@@ -425,3 +425,55 @@
    </div>
 
 </div>
+
+
+<script>
+   get_booking_history()
+var parking_lot_data;
+
+function filter_log() {
+   var search_term = $("#search_term").val()
+    var booking_from_date = $("#booking_from_date").val()
+    var booking_to_date = $("#booking_to_date").val()
+    get_booking_history(booking_from_date, booking_to_date, search_term)
+}
+
+
+function get_booking_history(booking_from_date = "", booking_to_date = "", search_term="") {
+
+
+    console.log("success");
+    var json_data = {
+        function_name: 'get_booking_history_admin',
+        booking_from_date: booking_from_date,
+        booking_to_date: booking_to_date,
+        search_term:search_term
+
+    }
+    console.log(json_data);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "<?php echo $site_url ?>/model/lot_model.php");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    var data = JSON.stringify(json_data);
+    xhr.send(data);
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+         console.log(xhr.responseText);
+            parking_lot_data = JSON.parse(xhr.responseText);
+            //console.log(xhr.responseText);
+            
+
+        } else {
+            console.log("Error: " + xhr.status);
+        }
+    };
+
+
+
+
+    //   find_parking_lot();
+
+
+}
+</script>

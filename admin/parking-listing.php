@@ -120,7 +120,7 @@ h2 {
     border-top: 1px solid #e5ecff !important;
     border-bottom: 1px solid #e5ecff !important;
     font-weight: 600;
-    color: #474d58;
+    color: #000000;
     text-transform: capitalize;
 }
 
@@ -131,7 +131,7 @@ h2 {
 }
 
 .listing_block tbody td {
-    color: #888;
+    color: #000;
     padding: 14px 10px;
     font-size: 16px;
 }
@@ -455,7 +455,7 @@ h2 {
     background-color: #fefefe;
     margin: auto;
     padding: 0;
-    border: 1px solid #888;
+    border: 1px solid #000;
     width: 80%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-animation-name: animatetop;
@@ -639,7 +639,7 @@ h2 {
                     <!-- <div class="form-group">
                <input type="text" class="form-control" name="" placeholder="Handler Id">
             </div> -->
-                    <div class="new_option">
+                    <!-- <div class="new_option">
                         <fieldset>
 
                             <input autocomplete="off" role="combobox" list="" id="input" name="handler"
@@ -657,7 +657,7 @@ h2 {
                             </datalist>
 
                         </fieldset>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-md-12 mt-2">
                     <button class="cta_btn" onclick="add_parking_lot()">Add Parking Lot</button>
@@ -779,7 +779,7 @@ h2 {
                     <!-- <div class="form-group">
                <input type="text" class="form-control" name="" placeholder="Handler Id">
             </div> -->
-                    <div class="new_option">
+                    <!-- <div class="new_option">
                         <fieldset>
 
                             <input autocomplete="off" role="combobox" list="" id="input_edit" name="handler_edit"
@@ -797,7 +797,7 @@ h2 {
                             </datalist>
 
                         </fieldset>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-md-12 mt-2">
                     <button class="cta_btn" onclick="update_parking_lot()">Edit Parking Lot</button>

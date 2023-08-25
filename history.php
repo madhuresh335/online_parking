@@ -1,493 +1,609 @@
-<?php 
-   include('header.php');
-   ?>
+<?php
+include 'header.php';
+?>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style type="text/css">
-   body ,.top_header{
+body,
+.top_header {
     background: #f6f7fb !important;
 }
-   *{
-   font-family: 'Mulish', sans-serif;
-   }
-   body{
-   margin:0;
-   }
-   button{
-   cursor: pointer;
-   }
-   *,:after,:before{box-sizing:border-box}
-   .clearfix:after,.clearfix:before{content:'';display:table}
-   .clearfix:after{clear:both;display:block}
-   a{color:inherit;text-decoration:none}
-   .main_block{
-   padding-left: 270px;
-   }
-   h1,h2{
-   font-size: 22px;
-   font-weight: 600;
-   }
-   .listing_block{
-   padding-left: 10px;
-   border-radius: 10px;
-   margin-bottom: 30px;
-   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
-   }
+
+* {
+    font-family: 'Mulish', sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+button {
+    cursor: pointer;
+}
+
+*,
+:after,
+:before {
+    box-sizing: border-box
+}
+
+.clearfix:after,
+.clearfix:before {
+    content: '';
+    display: table
+}
+
+.clearfix:after {
+    clear: both;
+    display: block
+}
+
+a {
+    color: inherit;
+    text-decoration: none
+}
+
+.main_block {
+    padding-left: 270px;
+}
+
+h1,
+h2 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.listing_block {
+    padding-left: 10px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+}
 </style>
 <style type="text/css">
-   .listing_block{
-   background: white;
-   padding-left: 20px;
-   padding:20px 10px 10px;
-   }
-   .listing_block td{
-   padding: 10px;
-   width: 15%;
-   }
-   .listing_block table{
-   border-collapse: separate;
-   width: 100%;
-   display: block;
-   overflow-x: auto;
+.listing_block {
+    background: white;
+    padding-left: 20px;
+    padding: 20px 10px 10px;
+}
+
+.listing_block td {
+    padding: 10px;
+    width: 15%;
+}
+
+.listing_block table {
+    border-collapse: separate;
+    width: 100%;
+    display: block;
+    overflow-x: auto;
     height: 505px;
     overflow-y: auto;
-   }
-   .listing_block thead td:nth-child(1){
-   border-radius: 5px 0 0 5px;
-   border-left: 1px solid #e5ecff!important;
-   padding-left: 10px;
-       position: sticky;
-    left: 0;
-    background: white;
-   }
-     .listing_block thead{
-      position: sticky;
-      top: 0;
-      z-index: 5;
-      background: white;
-     }
-    .listing_block thead div{
-      /*width: max-content;*/
-      width: 117px;
-    }
-   .listing_block tbody td:nth-child(1){
-   padding-left: 10px;
-       position: sticky;
-    left: 0;
-    background: white;
-   } 
-   .listing_block tbody td:last-child {
-   padding-right: 10px;
-   }
-   .listing_block thead td{
-   border-top: 1px solid #e5ecff!important;
-   border-bottom: 1px solid #e5ecff!important;
-   font-weight: 600;
-   color: #474d58;
-   text-transform: capitalize;
-   }
-   .listing_block thead td:last-child {
-   border-radius: 0 5px 5px 0;
-   border-right: 1px solid #e5ecff!important;
-   padding-right: 40px;
-   }
-   .listing_block tbody td{
-   color: #888;
-   padding: 14px 10px;
-   font-size: 16px;
-   }
-   .listing_block td{
-   text-align: left;
-   }
-   .role_block{
-   background: #2d93f9;
-   color: white;
-   border-radius: 30px;
-   text-align: center;
-   padding: 2px 24px;
-   display: inline-block;
-   }
-   .listing_block svg{
-   fill: #2d93f9;
-   cursor: pointer;
-   }
-   .add_btn{
-          margin-left: auto;
-   }
-    .listing_block table::-webkit-scrollbar-thumb
-        {
-            border-radius: 10px;
-            -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,.3);
-            background-color: #637099;
-        }
-        .listing_block  table::-webkit-scrollbar {
-   height: 4px;  
-   }
-        .listing_block table::-webkit-scrollbar-track
-        {
-            -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
-            border-radius: 10px;
-            background-color: #f1f1f1;
-        }
+}
 
-        .listing_block table::-webkit-scrollbar
-        {
-            width: 3px !important;
-            background-color: #f1f1f1;
-        }
-         .listing_block tbody tr{
-            border-bottom: 1px solid lightgrey;
-         }
-         .listing_block td:last-child{
-            position: sticky;
-            right: 0;
-            background: white;
-         }
-         .active_block {
+.listing_block thead td:nth-child(1) {
+    border-radius: 5px 0 0 5px;
+    border-left: 1px solid #e5ecff !important;
+    padding-left: 10px;
+    position: sticky;
+    left: 0;
+    background: white;
+}
+
+.listing_block thead {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: white;
+}
+
+.listing_block thead div {
+    /*width: max-content;*/
+    width: 117px;
+}
+
+.listing_block tbody td:nth-child(1) {
+    padding-left: 10px;
+    position: sticky;
+    left: 0;
+    background: white;
+}
+
+.listing_block tbody td:last-child {
+    padding-right: 10px;
+}
+
+.listing_block thead td {
+    border-top: 1px solid #e5ecff !important;
+    border-bottom: 1px solid #e5ecff !important;
+    font-weight: 600;
+    color: #000000;
+    text-transform: capitalize;
+}
+
+.listing_block thead td:last-child {
+    border-radius: 0 5px 5px 0;
+    border-right: 1px solid #e5ecff !important;
+    padding-right: 40px;
+}
+
+.listing_block tbody td {
+    color: #000;
+    padding: 14px 10px;
+    font-size: 16px;
+}
+
+.listing_block td {
+    text-align: left;
+}
+
+.role_block {
+    background: #2d93f9;
+    color: white;
+    border-radius: 30px;
+    text-align: center;
+    padding: 2px 24px;
+    display: inline-block;
+}
+
+.listing_block svg {
+    fill: #2d93f9;
+    cursor: pointer;
+}
+
+.add_btn {
+    margin-left: auto;
+}
+
+.listing_block table::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, .3);
+    background-color: #637099;
+}
+
+.listing_block table::-webkit-scrollbar {
+    height: 4px;
+}
+
+.listing_block table::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #f1f1f1;
+}
+
+.listing_block table::-webkit-scrollbar {
+    width: 3px !important;
+    background-color: #f1f1f1;
+}
+
+.listing_block tbody tr {
+    border-bottom: 1px solid lightgrey;
+}
+
+.listing_block td:last-child {
+    position: sticky;
+    right: 0;
+    background: white;
+}
+
+.active_block {
     background: #05d34e;
     color: white;
     border-radius: 30px;
     text-align: center;
     padding: 5px 24px;
-       width: 100%;
+    width: 100%;
     display: inline-block;
 }
-.inactive_block{
- background: blue;
-   color: white;
-   border-radius: 30px;
-   text-align: center;
-   padding: 5px 18px;
-   display: inline-block;
-      width: 100%;
-   }
-   .booked_block{
-     background: orange;
-   color: white;
-   border-radius: 30px;
-   text-align: center;
-   padding: 5px 18px;
-   display: inline-block;
-   width: 100%;
-   }
-   .cancel_block{
-     background: #ff4d4d;
-   color: white;
-   border-radius: 30px;
-   text-align: center;
-   padding: 5px 18px;
-   display: inline-block;
-      width: 100%;
-   }
-   .canceled_block span{
-        font-size: 14px;
+
+.inactive_block {
+    background: blue;
+    color: white;
+    border-radius: 30px;
+    text-align: center;
+    padding: 5px 18px;
+    display: inline-block;
+    width: 100%;
+}
+
+.booked_block {
+    background: orange;
+    color: white;
+    border-radius: 30px;
+    text-align: center;
+    padding: 5px 18px;
+    display: inline-block;
+    width: 100%;
+}
+
+.cancel_block {
+    background: #ff4d4d;
+    color: white;
+    border-radius: 30px;
+    text-align: center;
+    padding: 5px 18px;
+    display: inline-block;
+    width: 100%;
+}
+
+.canceled_block span {
+    font-size: 14px;
     margin-right: 10px;
     color: blue;
     text-transform: capitalize;
     cursor: pointer;
 }
-   
-   .form-control:disabled, .form-control[readonly] {
+
+.form-control:disabled,
+.form-control[readonly] {
     background-color: white;
     opacity: 1;
 }
 </style>
 <div class="">
-   <?php include('sidebar.php');?>
+    <?php include 'sidebar.php';?>
 </div>
 <div class="main_block mt-3 ">
-   <div class="listing_block mr-md-4">
-      <div class="d-flex mb-4 listing_block_wrap">
-          <h1 class="mb-2"> History</h1>
+    <div class="listing_block mr-md-4">
+        <div class="d-flex mb-4 listing_block_wrap">
+            <h1 class="mb-2"> History</h1>
             <div class="input-group">
-    <input type="text" class="form-control" placeholder="Search here">
-    
-  </div>
-  <div class=" show_advance_filter mt-3 mt-md-0">
-     <div class="d-flex ">
-      <div class="ml-md-3 d-md-flex">
-         <label class="w-100">From Date:</label>
-          <input type="date"  name="" placeholder="from date" value="" class="form-control">
-      </div>
-     <div class="ml-md-3 d-md-flex">
-         <label class="w-100">To Date:</label>
-         <input type="date"  name="" placeholder="to date" class="form-control"> 
-      </div>
-       
-        
-        <button type="button" class="btn add_btn cta_btn ml-2 mt-4 mt-md-0">GO</button>
-  <!--         <div class=" filter_option_show" onclick="hide_filter()">Hide Advance</div> -->
-     </div>
-  </div>
-  <style type="text/css">
-   .show_advance_filter label{
-      align-self: center;
-      margin-right: 10px;
-          margin-bottom: 0px;
-   }
-     .filter_option,.filter_option_show{
-   align-self: center;
-      color: #007bff;
-      font-size: 15px;
-      text-decoration: underline;
-      padding-left: 10px;
-      cursor: pointer;
-     }
-     .show_advance_filter select{
-          width: 182px;
-    margin-left: 20px;
-        padding: 8px !important;
-     }
-    /* .show_advance_filter{
+                <input type="text" class="form-control" placeholder="Search here">
+
+            </div>
+            <div class=" show_advance_filter mt-3 mt-md-0">
+                <div class="d-flex ">
+                    <div class="ml-md-3 d-md-flex">
+                        <label class="w-100">From Date:</label>
+                        <input type="date" name="" placeholder="from date" value="" id="booking_from_date"
+                            class="form-control">
+                    </div>
+                    <div class="ml-md-3 d-md-flex">
+                        <label class="w-100">To Date:</label>
+                        <input type="date" name="" placeholder="to date" id="booking_to_date" class="form-control">
+                    </div>
+
+
+                    <button type="button" class="btn add_btn cta_btn ml-2 mt-4 mt-md-0"
+                        onclick="filter_log()">GO</button>
+                    <!--         <div class=" filter_option_show" onclick="hide_filter()">Hide Advance</div> -->
+                </div>
+            </div>
+            <style type="text/css">
+            .show_advance_filter label {
+                align-self: center;
+                margin-right: 10px;
+                margin-bottom: 0px;
+            }
+
+            .filter_option,
+            .filter_option_show {
+                align-self: center;
+                color: #007bff;
+                font-size: 15px;
+                text-decoration: underline;
+                padding-left: 10px;
+                cursor: pointer;
+            }
+
+            .show_advance_filter select {
+                width: 182px;
+                margin-left: 20px;
+                padding: 8px !important;
+            }
+
+            /* .show_advance_filter{
       display: none;
      }*/
-     .input-group .form-control{
-          padding: 0px 4px;
-    height: 38px;
-     }
-    .input-group .btn-secondary{
-      padding: 0px;
-     }
-     .input-group svg {
-    fill: white;
-    cursor: pointer;
-    background: grey;
-    height: 100%;
-    padding: 10px;
-    width: 37px;
-}
-.add_btn{
-   height: 40px;
-}
-.input-group{
-       width: 20%;
-    margin-left: auto;
-}
-@media(max-width: 767px){
-   .listing_block_wrap{
-      flex-wrap: wrap;
-   }
-   .input-group {
-    width: 50%;
-}
-.listing_block td:last-child{
-    position: relative;
-}
-.listing_block table div {
-    width: 100px;
-}
-.listing_block table td:last-child div {
-    width: 100%;
-}
-.filter_option, .filter_option_show{
-       padding-left: 5px;
-    text-align: right;
-  
-    width: 100%;
-    font-size: 12px;
-}
-.show_advance_filter select {
-    width: 117px;
-    margin-left: 3px;
-    }
-  .show_advance_filter  .form-control{
-    width: 145px;
-    margin-right: 1px;
-    }
-    .filter_option_show{
-      position: absolute;
-      top: 0;
-    }
-    .show_advance_filter  .d-flex{
-      position: relative;
-    }
-}
-.cta_btn,.cta_btn:active, .cta_btn:hover {
-  background: #2d93f9;
-  /* padding: 10px 10px 3px; */
-  border-radius: 10px;
-  color: white;
-  border: none;
-  padding: 11px;
-  width: 100%;
-  font-size: 18px;
-  outline: none;
-}
-.add_btn,.add_btn:active, .add_btn:hover {
-  padding: 6px;
-  width: auto !important;
-  font-size: 18px;
-}
-  </style>
-  <script type="text/javascript">
-     function show_filter(){
-      $(".show_advance_filter").show();
-      $('.filter_option').hide();
-     }
-     function hide_filter(){
-       $(".show_advance_filter").hide();
-        $('.filter_option').show();
-     }
-  </script>
-   <!-- <div class="filter_option" onclick="show_filter()">Advance</div> -->
-      </div>
+            .input-group .form-control {
+                padding: 0px 4px;
+                height: 38px;
+            }
 
-     
-      <table>
-         <thead>
-            <tr>
-               
-               <td>
-                  <div>
-                    Lot name
+            .input-group .btn-secondary {
+                padding: 0px;
+            }
 
-                  </div>
-               </td>
-               <td>
-                  <div>
-                     Username
-                  </div>
-               </td>
-               <td>
-                  <div>
-                     Phone number
-                  </div>
-               </td>
-               <td>
-                  <div>
-                    Type of vehicle
+            .input-group svg {
+                fill: white;
+                cursor: pointer;
+                background: grey;
+                height: 100%;
+                padding: 10px;
+                width: 37px;
+            }
 
-                  </div>
-               </td>
-               <td>
-                   <div>Booking time</div>
-               </td>
-               <td>
-                  <div>
-                     Start time
+            .add_btn {
+                height: 40px;
+            }
 
-                  </div>
-               </td>
-               <td>
-                  <div>
-                    End time
-                  </div>
-               </td>
-               <td>
-                   <div>
-                       Number of Hours
-                   </div>
-               </td>
-                <td>
-                  <div>
-                    Price
-                  </div>
-               </td>
-               <td>
-                  <div>
-                    Status
-                  </div>
-               </td>
-               
-            </tr>
-         </thead>
-         <tbody>
-            <tr>
-              
-               <td>A1</td>
-               <td>test</td>
-               <td>1234567890</td>
-               <td>2 wheeler</td>
-                      <td> 2023-08-16 19:42:31</td>
-               <td> 2023-08-16 19:42:31</td>
-               <td> 2023-08-16 22:34:20</td>
-               <td>3</td>
-               <td>40</td>
-              <td><div class="booked_block">BOOKED</div>
-                <div class="d-flex canceled_block mt-2">
-                    <span onclick="cancel_book()">cancel</span>
-<span onclick="book_parking()">reschedule</span>
-                </div>
+            .input-group {
+                width: 20%;
+                margin-left: auto;
+            }
 
-              </td>
-                 
-           </tr>
-            <tr>
-              
-               <td>A1</td>
-               <td>test</td>
-               <td>1234567890</td>
-               <td>2 wheeler</td>
-                      <td> 2023-08-16 19:42:31</td>
-               <td> 2023-08-16 19:42:31</td>
-               <td> 2023-08-16 22:34:20</td>
-                <td>3</td>
-                <td>40</td>
-              <td><div class="active_block">COMPLETED</div></td>
-                 
-           </tr>
-           <tr>
-              
-               <td>A1</td>
-               <td>test</td>
-               <td>1234567890</td>
-               <td>2 wheeler</td>
-                      <td> 2023-08-16 19:42:31</td>
-               <td> 2023-08-16 19:42:31</td>
-               <td> 2023-08-16 22:34:20</td>
-                <td>3</td>
-                <td>40</td>
-              <td><div class="inactive_block">PROCESSING</div></td>
-                 
-           </tr>
-           <tr>
-              
-               <td>A1</td>
-               <td>test</td>
-               <td>1234567890</td>
-               <td>2 wheeler</td>
-                      <td> 2023-08-16 19:42:31</td>
-               <td> 2023-08-16 19:42:31</td>
-               <td> 2023-08-16 22:34:20</td>
-                <td>3</td>
-                <td>40</td>
-              <td><div class="cancel_block">CANCELLED</div></td>
-                 
-           </tr>
-      </tbody>
-      </table>
-   </div>
+            @media(max-width: 767px) {
+                .listing_block_wrap {
+                    flex-wrap: wrap;
+                }
+
+                .input-group {
+                    width: 50%;
+                }
+
+                .listing_block td:last-child {
+                    position: relative;
+                }
+
+                .listing_block table div {
+                    width: 100px;
+                }
+
+                .listing_block table td:last-child div {
+                    width: 100%;
+                }
+
+                .filter_option,
+                .filter_option_show {
+                    padding-left: 5px;
+                    text-align: right;
+
+                    width: 100%;
+                    font-size: 12px;
+                }
+
+                .show_advance_filter select {
+                    width: 117px;
+                    margin-left: 3px;
+                }
+
+                .show_advance_filter .form-control {
+                    width: 145px;
+                    margin-right: 1px;
+                }
+
+                .filter_option_show {
+                    position: absolute;
+                    top: 0;
+                }
+
+                .show_advance_filter .d-flex {
+                    position: relative;
+                }
+            }
+
+            .cta_btn,
+            .cta_btn:active,
+            .cta_btn:hover {
+                background: #2d93f9;
+                /* padding: 10px 10px 3px; */
+                border-radius: 10px;
+                color: white;
+                border: none;
+                padding: 11px;
+                width: 100%;
+                font-size: 18px;
+                outline: none;
+            }
+
+            .add_btn,
+            .add_btn:active,
+            .add_btn:hover {
+                padding: 6px;
+                width: auto !important;
+                font-size: 18px;
+            }
+            </style>
+            <script type="text/javascript">
+            function show_filter() {
+                $(".show_advance_filter").show();
+                $('.filter_option').hide();
+            }
+
+            function hide_filter() {
+                $(".show_advance_filter").hide();
+                $('.filter_option').show();
+            }
+            </script>
+            <!-- <div class="filter_option" onclick="show_filter()">Advance</div> -->
+        </div>
+
+
+        <table>
+            <thead>
+                <tr>
+
+                    <td>
+                        <div>
+                            Lot name
+
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            Username
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            Phone number
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            Type of vehicle
+
+                        </div>
+                    </td>
+                    <td>
+                        <div>Booking time</div>
+                    </td>
+                    <td>
+                        <div>
+                            Start time
+
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            End time
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            Number of Hours
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            Price
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            Status
+                        </div>
+                    </td>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+
+                    <td>A1</td>
+                    <td>test</td>
+                    <td>1234567890</td>
+                    <td>2 wheeler</td>
+                    <td> 2023-08-16 19:42:31</td>
+                    <td> 2023-08-16 19:42:31</td>
+                    <td> 2023-08-16 22:34:20</td>
+                    <td>3</td>
+                    <td>40</td>
+                    <td>
+                        <div class="booked_block">BOOKED</div>
+                        <div class="d-flex canceled_block mt-2">
+                            <span onclick="cancel_book('11')">cancel</span>
+                            <span onclick="book_parking('11')">reschedule</span>
+                        </div>
+
+                    </td>
+
+                </tr>
+                <tr>
+
+                    <td>A1</td>
+                    <td>test</td>
+                    <td>1234567890</td>
+                    <td>2 wheeler</td>
+                    <td> 2023-08-16 19:42:31</td>
+                    <td> 2023-08-16 19:42:31</td>
+                    <td> 2023-08-16 22:34:20</td>
+                    <td>3</td>
+                    <td>40</td>
+                    <td>
+                        <div class="active_block">COMPLETED</div>
+                    </td>
+
+                </tr>
+                <tr>
+
+                    <td>A1</td>
+                    <td>test</td>
+                    <td>1234567890</td>
+                    <td>2 wheeler</td>
+                    <td> 2023-08-16 19:42:31</td>
+                    <td> 2023-08-16 19:42:31</td>
+                    <td> 2023-08-16 22:34:20</td>
+                    <td>3</td>
+                    <td>40</td>
+                    <td>
+                        <div class="inactive_block">PROCESSING</div>
+                    </td>
+
+                </tr>
+                <tr>
+
+                    <td>A1</td>
+                    <td>test</td>
+                    <td>1234567890</td>
+                    <td>2 wheeler</td>
+                    <td> 2023-08-16 19:42:31</td>
+                    <td> 2023-08-16 19:42:31</td>
+                    <td> 2023-08-16 22:34:20</td>
+                    <td>3</td>
+                    <td>40</td>
+                    <td>
+                        <div class="cancel_block">CANCELLED</div>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 </div>
-  
+
 <script type="text/javascript">
-    function cancel_book(){
-        $('#delete_modal').show();
-    }
-    function close_modal(x) {
+function cancel_book(id) {
+    $('#delete_modal').show();
+    $('#cancel_booking_id').val(id)
+}
+
+function close_modal(x) {
     $("#" + x).hide();
 }
-function yes_btn(){
-      $('#delete_modal').hide();
+
+function yes_btn() {
+    $('#delete_modal').hide();
+    var cancel_booking_id = $('#cancel_booking_id').val();
+    var json_data = {
+            function_name: 'cancel_booking',
+            cancel_booking_id: cancel_booking_id,
+        }
+        console.log(json_data);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "<?php echo $site_url ?>/model/lot_model.php");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        var data = JSON.stringify(json_data);
+        xhr.send(data);
+
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // var json_response = JSON.parse(xhr.responseText);
+                console.log(xhr.responseText);
+
+            } else {
+                console.log("Error: " + xhr.status);
+            }
+        };
 }
-function no_btn(){
-      $('#delete_modal').hide();
+
+function no_btn() {
+    $('#delete_modal').hide();
 }
-function book_parking(){
+
+function book_parking(id) {
     $('#edit_modal').show()
+    $('#rescheduled_booking_id').val(id)
+    var temp_data = parking_lot_data[id];
+    $("#two_wheeler_price").val(temp_data.two_wheeler_price);
+    $("#four_wheeler_price").val(temp_data.four_wheeler_price);
+    
+    
 }
+
 function calculate_price(type) {
- 
-   var base_price =     $('#'+type+'_price').val();
-   var booking_hours =     $("#booking_hours").val();
-    $("#book_price").val(base_price*booking_hours);
-   
+
+    var base_price = $('#' + type + '_price').val();
+    var booking_hours = $("#booking_hours").val();
+    $("#book_price").val(base_price * booking_hours);
+
 }
 </script>
 
-  <!-- delete block -->
-  <style type="text/css">
+<!-- delete block -->
+<style type="text/css">
 .modal-content_new h2 {
     background: #2d93f9;
     color: white;
@@ -525,7 +641,7 @@ function calculate_price(type) {
     background-color: #fefefe;
     margin: auto;
     padding: 0;
-    border: 1px solid #888;
+    border: 1px solid #000;
     width: 80%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-animation-name: animatetop;
@@ -628,11 +744,12 @@ function calculate_price(type) {
     width: auto;
     font-size: 18px;
 }
+
 .modal .no_btn {
     border: 2px solid #2d93f9;
     background: transparent;
     color: #2d93f9;
-   
+
 }
 </style>
 
@@ -646,6 +763,7 @@ function calculate_price(type) {
     <div class="modal_new ">
         <div class="modal-content_new  ">
             <span class="close_icon" onclick="close_modal('delete_modal')">x</span>
+            <input type="hidden" name="" id="cancel_booking_id" value="">
             <h2 class="mb-4">Cancel the parking</h2>
             <div class="row mt-5">
 
@@ -665,11 +783,11 @@ function calculate_price(type) {
 
 <!-- reschedule popup -->
 <style type="text/css">
-    .radio-group {
+.radio-group {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
 }
 
 /* Style for individual radio buttons */
@@ -712,7 +830,9 @@ function calculate_price(type) {
 .vehicle_type {
     display: none;
 }
-.form-control:disabled, .form-control[readonly] {
+
+.form-control:disabled,
+.form-control[readonly] {
     background-color: white;
     opacity: 1;
 }
@@ -726,10 +846,11 @@ function calculate_price(type) {
                 <div class="col-md-6">
                     <label>From date</label>
                     <?php
-         $current_time = date("H:i");
-         $max_time = date("H:i", strtotime("+2 hours"));
- ?>
-                    <input class='form-control' type="time" id="booking_time"  min="16:00" max="22:00"value="<?php echo  $current_time?>">
+$current_time = date("H:i");
+$max_time = date("H:i", strtotime("+2 hours"));
+?>
+                    <input class='form-control' type="time" id="booking_time" min="16:00" max="22:00"
+                        value="<?php echo $current_time ?>">
                 </div>
                 <div class="col-md-6">
                     <label>Number of Hours</label>
@@ -741,35 +862,40 @@ function calculate_price(type) {
 
 
                 </div>
-               
+
                 <div class="col-md-12 mt-4">
                     <div class="d-md-flex">
                         <label>Wheeler Type</label>
-                    <div class="radio-group d-md-flex ml-4">
-                        <label class="radio">
-                            <input type="radio" name="vehicle" value="four_wheeler" checked onclick="calculate_price('four_wheeler')">
-                            <span class="radio-custom" ></span>
-                            4-Wheeler
-                        </label>
-                        <label class="radio ml-4">
-                            <input type="radio" name="vehicle" value="two_wheeler" onclick="calculate_price('two_wheeler')">
-                            <span class="radio-custom"></span>
-                            2-Wheeler
-                        </label>
+                        <div class="radio-group d-md-flex ml-4">
+                            <label class="radio">
+                                <input type="radio" name="vehicle" value="four_wheeler" checked
+                                    onclick="calculate_price('four_wheeler')">
+                                <span class="radio-custom"></span>
+                                4-Wheeler
+                            </label>
+                            <label class="radio ml-4">
+                                <input type="radio" name="vehicle" value="two_wheeler"
+                                    onclick="calculate_price('two_wheeler')">
+                                <span class="radio-custom"></span>
+                                2-Wheeler
+                            </label>
 
-                    </div> 
+                        </div>
                     </div>
-                   
+
                     <div class="vehicle_type error">Please select the vehicle type</div>
                 </div>
-                 <div class="col-md-12 mt-4 text-left">
+                <div class="col-md-12 mt-4 text-left">
                     <label>Price</label>
                     <input type="text" name="" class='form-control' id="book_price" value="" readonly>
                     <span id="book_price_error" class="error"></span>
                 </div>
 
                 <div class="col-md-12 mt-4">
-                    <button class="cta_btn" onclick="book_now_block()">Book Now</button>
+                <input type="hidden" name="" id="rescheduled_booking_id" value="">
+                <input type="hidden" name="" id="two_wheeler_price" value="">
+                <input type="hidden" name="" id="four_wheeler_price" value="">
+                    <button class="cta_btn" onclick="reschedule_block()">Book Now</button>
                 </div>
             </div>
 
@@ -777,27 +903,26 @@ function calculate_price(type) {
     </div>
 </section>
 <!-- end -->
- <script>
-       
-        const currentTime = new Date();
-    const currentHours = currentTime.getHours();
-    const currentMinutes = currentTime.getMinutes();
+<script>
+const currentTime = new Date();
+const currentHours = currentTime.getHours();
+const currentMinutes = currentTime.getMinutes();
 
-    const inputField = document.getElementById("booking_time");
-    inputField.min = `${currentHours.toString().padStart(2, "0")}:${currentMinutes.toString().padStart(2, "0")}`;
-    inputField.max = "24:00"; // Max limit is 24 hours
+const inputField = document.getElementById("booking_time");
+inputField.min = `${currentHours.toString().padStart(2, "0")}:${currentMinutes.toString().padStart(2, "0")}`;
+inputField.max = "24:00"; // Max limit is 24 hours
 
-    inputField.addEventListener("input", function() {
-      const enteredTime = inputField.value;
-      const enteredHours = parseInt(enteredTime.split(":")[0]);
-      const enteredMinutes = parseInt(enteredTime.split(":")[1]);
+inputField.addEventListener("input", function() {
+    const enteredTime = inputField.value;
+    const enteredHours = parseInt(enteredTime.split(":")[0]);
+    const enteredMinutes = parseInt(enteredTime.split(":")[1]);
 
-      if (enteredHours < currentHours || (enteredHours === currentHours && enteredMinutes <= currentMinutes)) {
+    if (enteredHours < currentHours || (enteredHours === currentHours && enteredMinutes <= currentMinutes)) {
         inputField.value = inputField.min;
-      }
-    });
+    }
+});
 
-    function validateInput(inputElement) {
+function validateInput(inputElement) {
     const minValue = parseInt(inputElement.min);
     const maxValue = parseInt(inputElement.max);
     let value = parseInt(inputElement.value);
@@ -813,8 +938,8 @@ function calculate_price(type) {
     inputElement.value = value;
 }
 
-function book_now_block() {
-    var id = document.getElementById('edit_id').value;
+function reschedule_block(type) {
+    var id = document.getElementById('rescheduled_booking_id').value;
     var booking_time = document.getElementById('booking_time').value;
     var vehicle_type = $('input[name="vehicle"]:checked').val();
     var booking_hours = $('#booking_hours').val();
@@ -827,12 +952,12 @@ function book_now_block() {
         console.log("success");
         $("#edit_modal").hide();
         var json_data = {
-            function_name: 'book_parking_lot',
-            user_id: "<?php echo $user_id  ?>",
+            function_name: 'reschedule_block',
+            user_id: "<?php echo $user_id ?>",
             vehicle_type: vehicle_type,
             booking_time: booking_time,
             booking_hours: booking_hours,
-            lot_id: id
+            rescheduled_booking_id: id,
         }
         console.log(json_data);
         var xhr = new XMLHttpRequest();
@@ -851,13 +976,58 @@ function book_now_block() {
             }
         };
 
-
-
-
-        //   find_parking_lot();
-
     }
 }
+
+get_booking_history()
+var parking_lot_data;
+
+function filter_log() {
+    var booking_from_date = $("#booking_from_date").val()
+    var booking_to_date = $("#booking_to_date").val()
+    get_booking_history(booking_from_date, booking_to_date)
+}
+
+
+function get_booking_history(booking_from_date = "", booking_to_date = "") {
+
+
+    console.log("success");
+    $("#edit_modal").hide();
+    var json_data = {
+        function_name: 'get_booking_history',
+        user_id: "<?php echo $user_id ?>",
+        booking_from_date: booking_from_date,
+        booking_to_date: booking_to_date
+
+    }
+    console.log(json_data);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "<?php echo $site_url ?>/model/lot_model.php");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    var data = JSON.stringify(json_data);
+    xhr.send(data);
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            parking_lot_data = JSON.parse(xhr.responseText);
+            console.log(parking_lot_data);
+            
+
+        } else {
+            console.log("Error: " + xhr.status);
+        }
+    };
+
+
+
+
+    //   find_parking_lot();
+
+
+}
+
+
 function check_type(x) {
 
     const radioButtons = document.getElementsByName('vehicle');
@@ -876,4 +1046,4 @@ function check_type(x) {
         return true;
     }
 }
-    </script>
+</script>

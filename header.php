@@ -15,6 +15,7 @@ $url .= $_SERVER['HTTP_HOST'];
 $url .= $_SERVER['REQUEST_URI'];
 
 $site_url = "http://localhost/online_parking";
+
 if (trim($_SERVER['REQUEST_URI']) != "/online_parking/login.php") {
 $user_cookie = json_decode($_COOKIE['userdata'], true);
 $user_id =  $user_cookie['user_id'];
@@ -25,7 +26,9 @@ if (!$user_verify) {
 }}
 else
 {
- header("location:".$site_url.'/login.php');
+if (trim($_SERVER['REQUEST_URI']) != "/online_parking/forgot-password.php") {
+    header("location:".$site_url.'/login.php');
+}
 }
 
 }
